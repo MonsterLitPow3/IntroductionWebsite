@@ -128,6 +128,23 @@
             color: var(--text-sub);
             max-width: 700px;
             line-height: 1.8;
+            margin-bottom: 40px;
+        }
+
+        .hero-main-btn {
+            padding: 14px 36px;
+            border-radius: 30px;
+            background: var(--btn-bg);
+            color: var(--btn-text);
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .hero-main-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-3px);
         }
 
         /* 自我介紹區：左圖右文 */
@@ -255,13 +272,16 @@
         <button class="top-btn" id="themeBtn">🌓</button>
     </div>
 
-    <!-- 一進入：滿版名字+簡介 -->
+    <!-- 首頁滿版名字+簡介 + 按鈕 -->
     <section class="hero-top">
-        <h1 data-lang="en">Your Name</h1>
-        <h1 data-lang="zh">你的名字</h1>
+        <h1 data-lang="en">Chen Siu Hei Jerry Claudius</h1>
+        <h1 data-lang="zh">陳兆熙</h1>
 
         <p data-lang="en">Creative Tech Creator | Multimedia & IoT Developer</p>
         <p data-lang="zh">創意科技创作者｜多媒體影像｜物聯網嵌入式開發</p>
+
+        <a href="#about" class="hero-main-btn" data-lang="en">View Introduction & Works</a>
+        <a href="#about" class="hero-main-btn" data-lang="zh">查看自我介紹與作品</a>
     </section>
 
     <!-- 自我介紹：左圖 右文字 -->
@@ -272,16 +292,20 @@
             <h2 data-lang="zh">關於我</h2>
 
             <p data-lang="en">
-                I am a creator passionate about technology, multimedia production, embedded systems, and music creation. 
-                Skilled in 3D modeling, video post-production, IoT hardware development, and original music production.
+                Blending computer engineering fundamentals with digital media and creative arts training.
+                Skilled in UI/UX design, prototyping, web and app development across software and hardware.
+                Practiced in MV production, camera work, directing, livestreaming, editing and music remix under professional guidance.
+                Also experienced in motion tracking, 3D modeling and printing to bring creative ideas into realisation.
             </p>
             <p data-lang="zh">
-                熱衷科技創作、多媒體影像、嵌入式系統與音樂製作。
-                擅長3D建模、影像後製、物聯網硬體開發以及原創音樂創作，跨領域整合藝術與科技。
+                融合電機工程專業基礎與數位媒體、創意藝術訓練。
+                具備 UI/UX 設計、原型開發、網站與應用程式軟硬體開發能力。
+                受專業指導，熟練 MV 製作、掌鏡運鏡、導播、直播企劃、影像剪輯與音樂重製。
+                同時擁有動態追蹤、3D 建模與 3D 列印經歷，能將創意構想落實為完整作品。
             </p>
 
-            <button class="work-btn" id="goWorkBtn" data-lang="en">View My Works</button>
-            <button class="work-btn" id="goWorkBtn" data-lang="zh">查看我的作品集</button>
+            <a href="#portfolio" class="work-btn" data-lang="en">Browse All Works</a>
+            <a href="#portfolio" class="work-btn" data-lang="zh">瀏覽所有作品</a>
         </div>
     </section>
 
@@ -316,6 +340,11 @@
                 <h3 data-lang="zh">音樂影像創作</h3>
                 <span class="tools">Final Cut Pro + Logic Pro + Motion + After Effects + MotionCapture</span>
             </div>
+            <div class="card">
+                <h3 data-lang="en">Art Gallery(Available Currently)</h3>
+                <h3 data-lang="zh">互動藝術展覽</h3>
+                <span class="tools">Website + Light Art + Robotic Motion</span>
+            </div>
         </div>
     </section>
 
@@ -337,18 +366,6 @@
             }
         }
         createCircles();
-
-        // 進入網站自動滾動到自我介紹
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.getElementById('about').scrollIntoView({behavior:'smooth'});
-            }, 1200);
-        });
-
-        // 按鈕滾動到作品集
-        document.getElementById('goWorkBtn').addEventListener('click', ()=>{
-            document.getElementById('portfolio').scrollIntoView({behavior:'smooth'});
-        });
 
         // 語言切換
         const langBtn = document.getElementById('langBtn');
