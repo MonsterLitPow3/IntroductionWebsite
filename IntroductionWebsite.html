@@ -471,19 +471,117 @@
     </div>
 </div>
 
+<!-- ====================== 已修改：Digipet 頁面加入輪播模式 ====================== -->
 <div id="digipet-page" style="display:none;">
     <div class="header">
         <button class="top-btn" onclick="backToMain()">← Back</button>
         <button class="top-btn" id="langBtn6">繁體中文</button>
         <button class="top-btn" id="themeBtn6">🌓</button>
     </div>
-    <div class="empty-page">
-        <h2 data-lang="en">Digipet</h2>
-        <h2 data-lang="zh">電子寵物</h2>
-        <p data-lang="en">Coming soon</p>
-        <p data-lang="zh">即將推出</p>
+
+    <div class="detail-page" style="margin-top:80px;">
+        <h2 style="text-align:center;" data-lang="en">Digipet: Control and Pet Mode</h2>
+        <h2 style="text-align:center;" data-lang="zh">電子寵物：控制與寵物模式</h2>
+        <div style="margin:30px 0;"></div>
+
+        <!-- 輪播展示區 -->
+        <div class="slideshow-container">
+            <div class="slide" data-type="video">
+                <video muted playsinline>
+                    <source src="digipet1.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide" data-type="video">
+                <video muted playsinline>
+                    <source src="digipet2.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide" data-type="image">
+                <img src="digipet_img1.png">
+            </div>
+            <div class="slide" data-type="image">
+                <img src="digipet_img2.png">
+            </div>
+
+            <div style="text-align:center; padding:10px; background:rgba(0,0,0,0.2);">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+
+        <p data-lang="en">
+            Digipet is an interactive electronic pet project integrating STM32 and ESP32 control.
+            It includes two modes: Pet Mode (emotional interaction, status feedback) and Control Mode (sensor control, remote operation).
+            Combined with a web-based control panel, it realizes real-time communication, action response and intelligent interaction.
+        </p>
+        <p data-lang="zh">
+            電子寵物 Digipet 是整合 STM32 與 ESP32 控制的互動式電子寵物專案。
+            具備寵物模式（情緒互動、狀態回饋）與控制模式（感測器操控、遠端操作）。
+            搭配網頁控制介面，實現即時通訊、動作反應與智慧互動功能。
+        </p>
+
+        <div class="info-box">
+            <p data-lang="en"><strong>Release Date:</strong> 2025</p>
+            <p data-lang="zh"><strong>發佈日期：</strong> 2025</p>
+            <p data-lang="en"><strong>Technology:</strong> STM32 + ESP32 + Web Control</p>
+            <p data-lang="zh"><strong>技術：</strong> STM32 + ESP32 + 網頁控制</p>
+            <p data-lang="en"><strong>Production:</strong> Jerry Claudius Chen</p>
+            <p data-lang="zh"><strong>製作：</strong> 陳兆熙</p>
+        </div>
+
+        <h3 style="margin:30px 0 10px;" data-lang="en">Project Presentation</h3>
+        <h3 style="margin:30px 0 10px;" data-lang="zh">專案簡報</h3>
+        <div class="youtube-container">
+            <iframe src="https://1drv.ms/p/c/c7d3dcba83a12d37/IQCCmzFP1r-MTJGQE8KNEvMTAfAbskmL1jH8x4neJ-MisnY?e=YJTJKn" frameborder="0" allowfullscreen></iframe>
+        </div>
     </div>
+
+    <script>
+        let digiSlideIndex = 0;
+        let digiSlides, digiDots;
+
+        function initDigiSlides() {
+            digiSlides = document.querySelectorAll("#digipet-page .slide");
+            digiDots = document.querySelectorAll("#digipet-page .dot");
+            digiSlideIndex = 0;
+            showDigiSlide(digiSlideIndex);
+        }
+
+        function showDigiSlide(n) {
+            if (!digiSlides || digiSlides.length === 0) return;
+            
+            digiSlides.forEach(s => s.style.display = "none");
+            digiDots.forEach(d => d.style.background = "#bbb");
+            
+            digiSlideIndex = n % digiSlides.length;
+            
+            digiSlides[digiSlideIndex].style.display = "block";
+            digiDots[digiSlideIndex].style.background = "var(--btn-bg)";
+            
+            const current = digiSlides[digiSlideIndex];
+            const video = current.querySelector("video");
+            
+            if (current.dataset.type === "video" && video) {
+                video.currentTime = 0;
+                video.play();
+                video.onended = () => {
+                    showDigiSlide(digiSlideIndex + 1);
+                };
+            } else {
+                setTimeout(() => {
+                    showDigiSlide(digiSlideIndex + 1);
+                }, 7000);
+            }
+        }
+
+        window.startDigiSlide = () => {
+            setTimeout(initDigiSlides, 300);
+        };
+    </script>
 </div>
+<!-- ====================== 修改結束 ====================== -->
 
 <div id="drone-page" style="display:none;">
     <div class="header">
@@ -625,6 +723,10 @@
         window.scrollTo(0, 0);
         if (page === 'drone' && window.startDroneSlide) {
             window.startDroneSlide();
+        }
+        // 啟動 Digipet 輪播
+        if (page === 'digipet' && window.startDigiSlide) {
+            window.startDigiSlide();
         }
         syncLangAll();
         syncThemeAll();
