@@ -619,7 +619,7 @@
             border-radius: 20px; 
             box-shadow: 0 8px 24px rgba(0,0,0,0.08); 
             padding: 20px; 
-            text-align: center;
+            text-align: center; 
             position: relative;
         }
         .title { 
@@ -1136,4 +1136,351 @@
     
     function enterPetMain() {
         isSpotting = false;
-        closeAll
+        closeAllPanels();
+        document.getElementById('petMainPanel').style.display = 'block';
+        sendCmd('S');
+    }
+    
+    function startNBM() {
+        isSpotting = false;
+        closeAllPanels();
+        document.getElementById('nbmPanel').style.display = 'block';
+        isWandering = true;
+        document.getElementById("toggleBtn").textContent = "🛑 Stop Wandering";
+        document.getElementById('wanderingText').innerHTML = `🌿 ${petName} the ${petType} is currently &lt;strong&gt;wandering around&lt;/strong&gt;...`;
+        sendCmd('M');
+    }
+    
+    function toggleWander() {
+        const btn = document.getElementById("toggleBtn");
+        const txt = document.getElementById("wanderingText");
+        if (isWandering) {
+            sendCmd('S');
+            btn.textContent = "▶️ Resume Wandering";
+            txt.innerHTML = `🛑 ${petName} the ${petType} has stopped wandering`;
+            isWandering = false;
+        } else {
+            sendCmd('M');
+            btn.textContent = "🛑 Stop Wandering";
+            txt.innerHTML = `🌿 ${petName} the ${petType} is currently wandering around...`;
+            isWandering = true;
+        }
+    }
+    
+    function startSpotting() {
+        closeAllPanels();
+        document.getElementById('spottingPanel').style.display = 'block';
+        initCanvas();
+        isSpotting = true;
+        isWandering = false;
+        
+        pathPoints = [{x: canvasWidth / 2, y: canvasHeight / 2}];
+        currentX = canvasWidth / 2;
+        currentY = canvasHeight / 2;
+        drawCanvas();
+        
+        document.getElementById('spottingInfo').innerHTML = `🎨 Use arrow buttons to control pet and draw path`;
+        sendCmd('S');
+    }
+    
+    function backToPetMenu() {
+        sendCmd('S');
+        isWandering = false;
+        isSpotting = false;
+        closeAllPanels();
+        document.getElementById('petMainPanel').style.display = 'block';
+    }
+    
+    function exitToMenu() {
+        sendCmd('S');
+        isWandering = false;
+        isSpotting = false;
+        closeAllPanels();
+        document.getElementById("modeSelect").style.display = "block";
+    }
+    
+    document.querySelectorAll('.animal-btn').forEach(btn =&gt; {
+        btn.addEventListener('click', () =&gt; {
+            currentAnimal = btn.dataset.animal;
+            localStorage.setItem("selectedAnimal", currentAnimal);
+            document.querySelectorAll('.animal-btn').forEach(b =&gt; b.classList.remove('active'));
+            btn.classList.add('active');
+            drawCanvas();
+        });
+    });
+    
+    document.querySelectorAll('.control-btn').forEach(btn =&gt; {
+        btn.addEventListener('contextmenu', (e) =&gt; e.preventDefault());
+        btn.addEventListener('dragstart', (e) =&gt; e.preventDefault());
+        btn.addEventListener('selectstart', (e) =&gt; e.preventDefault());
+        btn.addEventListener('pointerdown', (e) =&gt; {
+            e.preventDefault();
+            btn.classList.add('pressed');
+            sendCmd(btn.dataset.cmd);
+        });
+        btn.addEventListener('pointerup', (e) =&gt; {
+            e.preventDefault();
+            btn.classList.remove('pressed');
+            sendCmd('S');
+        });
+        btn.addEventListener('pointerleave', (e) =&gt; {
+            btn.classList.remove('pressed');
+            sendCmd('S');
+        });
+        btn.addEventListener('touchstart', (e) =&gt; {
+            e.preventDefault();
+            btn.classList.add('pressed');
+            sendCmd(btn.dataset.cmd);
+        });
+        btn.addEventListener('touchend', (e) =&gt; {
+            e.preventDefault();
+            btn.classList.remove('pressed');
+            sendCmd('S');
+        });
+    });
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</div>
+            </div>
+        </div>
+
+        <h3 style="margin:30px 0 10px;" data-lang="en">Project Presentation</h3>
+        <h3 style="margin:30px 0 10px;" data-lang="zh">專案簡報</h3>
+        <div class="youtube-container">
+            <iframe src="https://1drv.ms/p/c/c7d3dcba83a12d37/IQSCmzFP1r-MTJGQE8KNEvMTAQvpd4SGRH2TY1CPETmZuDE" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <script>
+        let digiSlideIndex = 0;
+        let digiSlides, digiDots;
+
+        function initDigiSlides() {
+            digiSlides = document.querySelectorAll("#digipet-page .slide");
+            digiDots = document.querySelectorAll("#digipet-page .dot");
+            digiSlideIndex = 0;
+            showDigiSlide(digiSlideIndex);
+        }
+
+        function showDigiSlide(n) {
+            if (!digiSlides || digiSlides.length === 0) return;
+            
+            digiSlides.forEach(s => s.style.display = "none");
+            digiDots.forEach(d => d.style.background = "#bbb");
+            
+            digiSlideIndex = n % digiSlides.length;
+            
+            digiSlides[digiSlideIndex].style.display = "block";
+            digiDots[digiSlideIndex].style.background = "var(--btn-bg)";
+            
+            const current = digiSlides[digiSlideIndex];
+            const video = current.querySelector("video");
+            
+            if (current.dataset.type === "video" && video) {
+                video.currentTime = 0;
+                video.play();
+                video.onended = () => {
+                    showDigiSlide(digiSlideIndex + 1);
+                };
+            } else {
+                setTimeout(() => {
+                    showDigiSlide(digiSlideIndex + 1);
+                }, 7000);
+            }
+        }
+
+        window.startDigiSlide = () => {
+            setTimeout(initDigiSlides, 300);
+        };
+    </script>
+</div>
+
+<div id="drone-page" style="display:none;">
+    <div class="header">
+        <button class="top-btn" onclick="backToMain()">← Back</button>
+        <button class="top-btn" id="langBtn7">繁體中文</button>
+        <button class="top-btn" id="themeBtn7">🌓</button>
+    </div>
+
+    <div class="detail-page" style="margin-top:80px;">
+        <h2 style="text-align:center;" data-lang="en">All-IN-ONE Drone Project</h2>
+        <h2 style="text-align:center;" data-lang="zh">科技研究與虛擬無人機專案</h2>
+        <div style="margin:30px 0;"></div>
+
+        <div class="slideshow-container">
+            <div class="slide" data-type="video">
+                <video muted playsinline loop>
+                    <source src="Riding_DEMVd.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide" data-type="video">
+                <video muted playsinline loop>
+                    <source src="glidemode.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide" data-type="video">
+                <video muted playsinline loop>
+                    <source src="diveDEM.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide" data-type="image">
+                <img src="Drone_BluePrint.png">
+            </div>
+            <div class="slide" data-type="image">
+                <img src="Drone.png">
+            </div>
+
+            <div style="text-align:center; padding:10px; background:rgba(0,0,0,0.2);">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+
+        <p data-lang="en">
+            This project focuses on UAV structural design, aerodynamic simulation and 3D virtual drone modeling.
+            Using Blender for full 3D asset creation, mechanical assembly simulation and scene environment building.
+            The research also includes drone flight principle analysis, power system matching and future application prospects in delivery, inspection and aerial photography.
+            By combining a possible approach of an ALL-IN-ONE Drone with Glide+Fly+Dive Functions
+        </p>
+        <p data-lang="zh">
+            本專案聚焦無人機結構設計、空氣動力模擬與虛擬無人機 3D 建模。
+            透過 Blender 完成完整三維資產建模、機械結構組裝模擬與場景環境搭建。
+            同時研究無人機飛行原理、動力系統匹配，以及在物流配送、巡檢、空拍領域的未來應用發展。
+            融合並製作一個多合一方案，展現奔馳+潛移+飛翔三合一無人機功能。
+        </p>
+
+        <div class="info-box">
+            <p data-lang="en"><strong>Release Date:</strong> 10/05/2025</p>
+            <p data-lang="zh"><strong>發佈日期：</strong> 10/05/2025</p>
+            <p data-lang="en"><strong>Duration / Scale:</strong> 3D Modeling & Research Project</p>
+            <p data-lang="zh"><strong>內容規模：</strong> 3D建模 + 學術研究專案</p>
+            <p data-lang="en"><strong>Production:</strong> Jerry Claudius Chen (3D Designer & Researcher)</p>
+            <p data-lang="zh"><strong>製作：</strong> 陳兆熙（3D建模設計 & 專案研究）</p>
+        </div>
+
+        <h3 style="margin:30px 0 10px;" data-lang="en">Project Presentation (PPT)</h3>
+        <h3 style="margin:30px 0 10px;" data-lang="zh">專案簡報</h3>
+        <div class="youtube-container">
+            <iframe src="https://1drv.ms/p/c/c7d3dcba83a12d37/IQSCmzFP1r-MTJGQE8KNEvMTAQvpd4SGRH2TY1CPETmZuDE" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+</div>
+
+    <script>
+        let droneSlideIndex = 0;
+        let droneSlides, droneDots;
+
+        function initDroneSlides() {
+            droneSlides = document.querySelectorAll("#drone-page .slide");
+            droneDots = document.querySelectorAll("#drone-page .dot");
+            droneSlideIndex = 0;
+            showDroneSlide(droneSlideIndex);
+        }
+
+        function showDroneSlide(n) {
+            if (!droneSlides || droneSlides.length === 0) return;
+            
+            droneSlides.forEach(s => s.style.display = "none");
+            droneDots.forEach(d => d.style.background = "#bbb");
+            
+            droneSlideIndex = n % droneSlides.length;
+            
+            droneSlides[droneSlideIndex].style.display = "block";
+            droneDots[droneSlideIndex].style.background = "var(--btn-bg)";
+            
+            const current = droneSlides[droneSlideIndex];
+            const video = current.querySelector("video");
+            
+            if (current.dataset.type === "video" && video) {
+                video.currentTime = 0;
+                video.play();
+                video.onended = () => {
+                    showDroneSlide(droneSlideIndex + 1);
+                };
+            } else {
+                setTimeout(() => {
+                    showDroneSlide(droneSlideIndex + 1);
+                }, 7000);
+            }
+        }
+
+        window.startDroneSlide = () => {
+            setTimeout(initDroneSlides, 300);
+        };
+    </script>
+</div>
+
+<script>
+    function createCircles() {
+        const container = document.getElementById('bgCircles');
+        for(let i=0;i<18;i++){
+            const c = document.createElement('div');
+            c.classList.add('circle');
+            let s = Math.random()*80+20;
+            c.style.width = s+'px'; c.style.height = s+'px';
+            c.style.left = Math.random()*100+'%';
+            c.style.animationDelay = Math.random()*20+'s';
+            c.style.animationDuration = Math.random()*10+15+'s';
+            container.appendChild(c);
+        }
+    }
+    createCircles();
+
+    function goPage(page) {
+        document.getElementById('main-page').style.display = 'none';
+        document.querySelectorAll('[id$="-page"]').forEach(p => p.style.display = 'none');
+        document.getElementById(page + '-page').style.display = 'block';
+        window.scrollTo(0, 0);
+        if (page === 'drone' && window.startDroneSlide) {
+            window.startDroneSlide();
+        }
+        if (page === 'digipet' && window.startDigiSlide) {
+            window.startDigiSlide();
+        }
+        syncLangAll();
+        syncThemeAll();
+    }
+
+    function backToMain() {
+        document.querySelectorAll('[id$="-page"]').forEach(p => p.style.display = 'none');
+        document.getElementById('main-page').style.display = 'block';
+        window.scrollTo(0, 0);
+    }
+
+    let isEn = true;
+    function setLang(lang) {
+        isEn = lang;
+        document.querySelectorAll('[data-lang="en"]').forEach(e=>e.classList.toggle('active',lang));
+        document.querySelectorAll('[data-lang="zh"]').forEach(e=>e.classList.toggle('active',!lang));
+        document.documentElement.lang = lang ? 'en' : 'zh-TW';
+        const btns = document.querySelectorAll('[id^="langBtn"]');
+        btns.forEach(b=>b.innerText = lang ? '繁體中文' : 'English');
+    }
+
+    function syncLangAll() {
+        const btns = document.querySelectorAll('[id^="langBtn"]');
+        btns.forEach((b)=>{
+            b.onclick = ()=>{ setLang(!isEn); };
+        });
+    }
+
+    function syncThemeAll() {
+        const ts = document.querySelectorAll('[id^="themeBtn"]');
+        ts.forEach((b)=>{
+            b.onclick = ()=>{
+                document.body.classList.toggle('dark-mode');
+                localStorage.setItem('darkMode', document.body.classList.contains('dark-mode')?'on':'off');
+            };
+        });
+    }
+
+    document.querySelectorAll('[data-lang="en"]').forEach(e=>e.classList.add('active'));
+    if(localStorage.getItem('darkMode')==='on') document.body.classList.add('dark-mode');
+    syncLangAll();
+    syncThemeAll();
+</script>
+</body>
+</html>
