@@ -309,17 +309,19 @@
             border-radius: 20px;
             overflow: hidden;
             box-shadow: var(--shadow);
+            background: #000;
         }
 
         .slide {
             display: none;
+            width: 100%;
         }
 
         .slide img, .slide video {
             width: 100%;
-            aspect-ratio: 16/9;
-            object-fit: cover;
+            height: auto;
             display: block;
+            object-fit: contain;
         }
 
         .dot {
@@ -493,33 +495,32 @@
     <div class="detail-page" style="margin-top:80px;">
         <h2 style="text-align:center;" data-lang="en">All-IN-ONE Drone Project</h2>
         <h2 style="text-align:center;" data-lang="zh">科技研究與虛擬無人機專案</h2>
-
         <div style="margin:30px 0;"></div>
 
         <div class="slideshow-container">
-            <div class="slide">
-                <video muted loop playsinline>
+            <div class="slide" data-type="video">
+                <video muted playsinline>
                     <source src="Riding_DEMVd.mp4" type="video/mp4">
                 </video>
             </div>
-            <div class="slide">
-                <video muted loop playsinline>
+            <div class="slide" data-type="video">
+                <video muted playsinline>
                     <source src="glidemode.mp4" type="video/mp4">
                 </video>
             </div>
-            <div class="slide">
-                <video muted loop playsinline>
+            <div class="slide" data-type="video">
+                <video muted playsinline>
                     <source src="diveDEM.mp4" type="video/mp4">
                 </video>
             </div>
-            <div class="slide">
+            <div class="slide" data-type="image">
                 <img src="Drone_BluePrint.png">
             </div>
-            <div class="slide">
+            <div class="slide" data-type="image">
                 <img src="Drone.png">
             </div>
 
-            <div style="text-align:center; padding:10px; background:rgba(0,0,0,0.15);">
+            <div style="text-align:center; padding:10px; background:rgba(0,0,0,0.2);">
                 <span class="dot"></span>
                 <span class="dot"></span>
                 <span class="dot"></span>
@@ -559,23 +560,45 @@
 
     <script>
         let slideIndex = 0;
-        const slides = document.querySelectorAll("#drone-page .slide");
-        const dots = document.querySelectorAll("#drone-page .dot");
+        let slides, dots;
 
-        function showSlides() {
-            for (let i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-            }
-            slideIndex++;
-            if (slideIndex > slides.length) slideIndex = 1;
-            for (let i = 0; i < dots.length; i++) {
-                dots[i].style.background = "#bbb";
-            }
-            slides[slideIndex - 1].style.display = "block";
-            dots[slideIndex - 1].style.background = "var(--btn-bg)";
-            setTimeout(showSlides, 7000);
+        function initSlides() {
+            slides = document.querySelectorAll("#drone-page .slide");
+            dots = document.querySelectorAll("#drone-page .dot");
+            slideIndex = 0;
+            showSlide(slideIndex);
         }
-        window.startDroneSlide = () => setTimeout(showSlides, 300);
+
+        function showSlide(n) {
+            if (!slides || slides.length === 0) return;
+            
+            slides.forEach(s => s.style.display = "none");
+            dots.forEach(d => d.style.background = "#bbb");
+            
+            slideIndex = n % slides.length;
+            
+            slides[slideIndex].style.display = "block";
+            dots[slideIndex].style.background = "var(--btn-bg)";
+            
+            const current = slides[slideIndex];
+            const video = current.querySelector("video");
+            
+            if (current.dataset.type === "video" && video) {
+                video.currentTime = 0;
+                video.play();
+                video.onended = () => {
+                    showSlide(slideIndex + 1);
+                };
+            } else {
+                setTimeout(() => {
+                    showSlide(slideIndex + 1);
+                }, 7000);
+            }
+        }
+
+        window.startDroneSlide = () => {
+            setTimeout(initSlides, 300);
+        };
     </script>
 </div>
 
@@ -600,7 +623,9 @@
         document.querySelectorAll('[id$="-page"]').forEach(p => p.style.display = 'none');
         document.getElementById(page + '-page').style.display = 'block';
         window.scrollTo(0, 0);
-        if (page === 'drone' && window.startDroneSlide) window.startDroneSlide();
+        if (page === 'drone' && window.startDroneSlide) {
+            window.startDroneSlide();
+        }
         syncLangAll();
         syncThemeAll();
     }
