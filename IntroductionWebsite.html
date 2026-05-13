@@ -145,7 +145,7 @@
             margin: 100px auto;
             padding: 0 30px;
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr 1;
             gap: 50px;
             align-items: center;
         }
@@ -333,6 +333,53 @@
             display: inline-block;
             transition: background 0.3s ease;
         }
+
+        /* 雙視窗樣式 */
+        .dual-window {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 40px 0;
+        }
+        .window-box {
+            background: #1e1e1e;
+            border-radius: 16px;
+            padding: 10px;
+            height: 300px;
+            overflow: hidden;
+            border: 2px solid #333;
+        }
+        .window-box h4 {
+            color: #fff;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        .window-box iframe {
+            width: 100%;
+            height: 250px;
+            border: none;
+            border-radius: 8px;
+        }
+        .code-area {
+            background: #1e1e1e;
+            color: #dcdcaa;
+            padding: 15px;
+            font-family: monospace;
+            font-size: 13px;
+            height: 250px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            border-radius: 8px;
+        }
+        .note {
+            color: #ff6b6b;
+            font-size: 14px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        @media (max-width:768px) {
+            .dual-window { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
@@ -471,7 +518,7 @@
     </div>
 </div>
 
-<!-- ====================== 已修改：Digipet 頁面加入輪播模式 ====================== -->
+<!-- ====================== 已修改：Digipet 頁面 ====================== -->
 <div id="digipet-page" style="display:none;">
     <div class="header">
         <button class="top-btn" onclick="backToMain()">← Back</button>
@@ -484,27 +531,21 @@
         <h2 style="text-align:center;" data-lang="zh">電子寵物：控制與寵物模式</h2>
         <div style="margin:30px 0;"></div>
 
-        <!-- 輪播展示區 -->
+        <!-- 輪播：已放入你指定的3個檔案 -->
         <div class="slideshow-container">
             <div class="slide" data-type="video">
                 <video muted playsinline>
-                    <source src="digipet1.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="slide" data-type="video">
-                <video muted playsinline>
-                    <source src="digipet2.mp4" type="video/mp4">
+                    <source src="4demovideo.mp4" type="video/mp4">
                 </video>
             </div>
             <div class="slide" data-type="image">
-                <img src="digipet_img1.png">
+                <img src="5photo1.jpg">
             </div>
             <div class="slide" data-type="image">
-                <img src="digipet_img2.png">
+                <img src="5photo2.jpg">
             </div>
 
             <div style="text-align:center; padding:10px; background:rgba(0,0,0,0.2);">
-                <span class="dot"></span>
                 <span class="dot"></span>
                 <span class="dot"></span>
                 <span class="dot"></span>
@@ -530,6 +571,688 @@
             <p data-lang="en"><strong>Production:</strong> Jerry Claudius Chen</p>
             <p data-lang="zh"><strong>製作：</strong> 陳兆熙</p>
         </div>
+
+        <!-- ====================== 雙迷你視窗：網站 + 代碼 ====================== -->
+        <h3 style="margin:30px 0 10px;">Web Interface & Source Code</h3>
+        <p class="note">⚠️ 只供參考，無法連上藍牙因爲裝置要在範圍内</p>
+
+        <div class="dual-window">
+            <!-- 左：網站預覽 -->
+            <div class="window-box">
+                <h4>Website Preview</h4>
+                <iframe src="https://monsterlitpow3.github.io/30_Project/index_2.html"></iframe>
+            </div>
+
+            <!-- 右：代碼區（你自己填） -->
+            <div class="window-box">
+                <h4>Source Code</h4>
+                <div class="code-area" id="codeArea">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Digipet Smart Car - Spotting Mode</title>
+    <style>
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: 'Arial', sans-serif; 
+        }
+        
+        body, button, div, span, .control-btn, .mode-btn {
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+        }
+        
+        body { 
+            background: #f2f2f7; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            padding: 20px; 
+        }
+        .container { 
+            width: 100%; 
+            max-width: 420px; 
+            background: #fff; 
+            border-radius: 20px; 
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08); 
+            padding: 20px; 
+            text-align: center; 
+            position: relative;
+        }
+        .title { 
+            font-size: 24px; 
+            margin-bottom: 10px; 
+            color: #1c1c1e; 
+            font-weight: 700; 
+        }
+        #status { 
+            font-size: 15px; 
+            font-weight: 600; 
+            margin-bottom: 15px; 
+        }
+        .connect-btn { 
+            width: 100%; 
+            height: 50px; 
+            border-radius: 14px; 
+            border: none; 
+            background: #007aff; 
+            color: white; 
+            font-size: 17px; 
+            font-weight: 600; 
+            cursor: pointer; 
+            margin-bottom: 15px; 
+        }
+        .connect-btn:active { transform: scale(0.96); }
+
+        .settings-icon {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            width: 36px;
+            height: 36px;
+            background: #e5e5ea;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            cursor: pointer;
+            display: none;
+        }
+
+        .mode-select, .control-panel, .pet-main-panel, 
+        .nbm-active-panel, .spotting-panel, .setup-panel, .control-info { 
+            display: none; 
+            margin-top: 16px; 
+        }
+
+        /* 画板样式 */
+        .spotting-panel {
+            background: #f9f9fb;
+            padding: 16px;
+            border-radius: 16px;
+        }
+        .canvas-container {
+            background: white;
+            border-radius: 12px;
+            border: 2px solid #d1d1d6;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        canvas {
+            display: block;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 10px;
+            cursor: crosshair;
+        }
+        .spotting-controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .spotting-controls button {
+            flex: 1;
+            height: 48px;
+            border-radius: 12px;
+            border: none;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .clear-canvas-btn {
+            background: #ff9500;
+            color: white;
+        }
+        .animal-select {
+            margin-bottom: 15px;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .animal-btn {
+            width: 55px;
+            height: 55px;
+            border-radius: 30px;
+            border: 2px solid #d1d1d6;
+            background: white;
+            font-size: 28px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .animal-btn.active {
+            border-color: #007aff;
+            background: #e8f0fe;
+        }
+
+        .control-info {
+            background: #e8f0fe;
+            padding: 12px;
+            border-radius: 12px;
+            font-size: 14px;
+        }
+
+        .mode-btn { 
+            width: 100%; 
+            height: 52px; 
+            border-radius: 14px; 
+            border: none; 
+            background: #000; 
+            color: white; 
+            font-size: 17px; 
+            font-weight: 600; 
+            cursor: pointer; 
+            margin: 8px 0; 
+        }
+        .mode-btn:active { transform: scale(0.96); }
+        .back-btn { background: #8e8e93 !important; }
+        .stop-btn { background: #ff3b30 !important; }
+
+        .btn-grid { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            gap: 10px; 
+            margin-top: 10px;
+        }
+        .row { display: flex; gap: 10px; }
+        .control-btn { 
+            width: 70px; 
+            height: 70px; 
+            border-radius: 16px; 
+            border: none; 
+            background: #1c1c1e; 
+            color: white; 
+            font-size: 26px; 
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .control-btn.pressed { background: #007aff !important; transform: scale(0.93); }
+
+        .pet-main-panel, .nbm-active-panel, .spotting-panel { 
+            background: #f9f9fb; 
+            padding: 18px; 
+            border-radius: 16px; 
+        }
+        .status-text {
+            font-size: 14px;
+            color: #3a3a3c;
+            margin: 8px 0;
+        }
+        .setup-panel {
+            background: #f9f9fb;
+            padding: 20px;
+            border-radius: 16px;
+            text-align: left;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        .input-group label {
+            font-size: 14px;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 6px;
+        }
+        .input-group input, .input-group select {
+            width: 100%;
+            height: 44px;
+            border-radius: 10px;
+            border: 1px solid #c7c7cc;
+            padding: 0 12px;
+            font-size: 15px;
+        }
+        .save-btn {
+            width: 100%;
+            height: 48px;
+            border-radius: 12px;
+            background: #007aff;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+        }
+        .disconnect-btn {
+            background: #ff3b30 !important;
+            margin-top: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="settings-icon" id="settingsBtn" onclick="showSetup()">⚙️</div>
+
+        <h1 class="title">Digipet Car</h1>
+        <div id="status" style="color: #ff3b30;">Disconnected</div>
+
+        <button class="connect-btn" id="connectBtn" onclick="startBLE()">Connect BLE</button>
+
+        <div class="mode-select" id="modeSelect">
+            <button class="mode-btn" onclick="enterController()">🎮 Controller Mode</button>
+            <button class="mode-btn" onclick="enterPetMain()">🐾 Pet Mode</button>
+            <button class="mode-btn disconnect-btn" onclick="disconnectBLE()">🔌 Disconnect</button>
+        </div>
+
+        <div class="control-panel" id="controls">
+            <div class="control-info" id="controlInfo">🎮 Ready to control</div>
+            <div class="btn-grid">
+                <div class="row"><button class="control-btn" data-cmd="F">▲</button></div>
+                <div class="row">
+                    <button class="control-btn" data-cmd="L">◀</button>
+                    <button class="control-btn stop-btn" data-cmd="S">●</button>
+                    <button class="control-btn" data-cmd="R">▶</button>
+                </div>
+                <div class="row"><button class="control-btn" data-cmd="B">▼</button></div>
+                <div class="row">
+                    <button class="control-btn" data-cmd="A">↺</button>
+                    <button class="control-btn" data-cmd="C">↻</button>
+                </div>
+            </div>
+            <button class="mode-btn back-btn" onclick="exitToMenu()">Back to Menu</button>
+            <button class="mode-btn disconnect-btn" onclick="disconnectBLE()">Disconnect</button>
+        </div>
+
+        <div class="pet-main-panel" id="petMainPanel">
+            <button class="mode-btn" onclick="startNBM()">🌿 Natural Behaviour Mode</button>
+            <button class="mode-btn" onclick="startSpotting()">🎨 Spotting Mode (Draw)</button>
+            <button class="mode-btn back-btn" onclick="exitToMenu()">Back to Main Menu</button>
+            <button class="mode-btn disconnect-btn" onclick="disconnectBLE()">Disconnect</button>
+        </div>
+
+        <div class="nbm-active-panel" id="nbmPanel">
+            <div class="status-text" id="wanderingText">Your pet is wandering...</div>
+            <button class="mode-btn" id="toggleBtn" onclick="toggleWander()">🛑 Stop Wandering</button>
+            <button class="mode-btn back-btn" onclick="backToPetMenu()">Back to Pet Menu</button>
+            <button class="mode-btn disconnect-btn" onclick="disconnectBLE()">Disconnect</button>
+        </div>
+
+        <div class="spotting-panel" id="spottingPanel">
+            <div class="animal-select">
+                <button class="animal-btn" data-animal="🐶">🐶</button>
+                <button class="animal-btn" data-animal="🐱">🐱</button>
+                <button class="animal-btn" data-animal="🐷">🐷</button>
+                <button class="animal-btn" data-animal="🐰">🐰</button>
+                <button class="animal-btn" data-animal="🐻">🐻</button>
+                <button class="animal-btn" data-animal="🐼">🐼</button>
+            </div>
+            <div class="canvas-container">
+                <canvas id="pathCanvas" width="350" height="350" style="width:350px;height:350px"></canvas>
+            </div>
+            <div class="spotting-controls">
+                <button class="clear-canvas-btn" onclick="clearCanvas()">🗑 Clear Path</button>
+                <button class="back-btn" onclick="backToPetMenu()">Back</button>
+            </div>
+            <div class="control-info" id="spottingInfo">🎨 Use arrow buttons to draw your pet path</div>
+            <div class="btn-grid" style="margin-top:15px;">
+                <div class="row"><button class="control-btn" data-cmd="F">▲</button></div>
+                <div class="row">
+                    <button class="control-btn" data-cmd="L">◀</button>
+                    <button class="control-btn stop-btn" data-cmd="S">●</button>
+                    <button class="control-btn" data-cmd="R">▶</button>
+                </div>
+                <div class="row"><button class="control-btn" data-cmd="B">▼</button></div>
+            </div>
+            <button class="mode-btn disconnect-btn" onclick="disconnectBLE()">Disconnect</button>
+        </div>
+
+        <div class="setup-panel" id="setupPanel">
+            <div class="setup-title">Pet Profile</div>
+            <div class="input-group">
+                <label>Pet Name</label>
+                <input type="text" id="petName" placeholder="e.g. Lucky, Momo">
+            </div>
+            <div class="input-group">
+                <label>Pet Type</label>
+                <select id="petType">
+                    <option>Dog</option><option>Cat</option><option>Pig</option>
+                    <option>Rabbit</option><option>Bear</option>
+                </select>
+            </div>
+            <button class="save-btn" onclick="savePetProfile()">Save & Continue</button>
+        </div>
+    </div>
+
+<script>
+    let characteristic = null;
+    let device = null;
+    let petName = "My Pet";
+    let petType = "Friend";
+    let isWandering = false;
+    let isSpotting = false;
+    let currentDirection = "";
+    
+    let canvas, ctx;
+    let canvasWidth = 350, canvasHeight = 350;
+    let currentX = canvasWidth / 2, currentY = canvasHeight / 2;
+    let currentAnimal = "🐶";
+    let pathPoints = [{x: currentX, y: currentY}];
+    
+    const directionMap = {
+        'F': 'Forward', 'B': 'Backward', 'L': 'Left', 'R': 'Right',
+        'C': 'Clockwise', 'A': 'Anti-clockwise', 'S': 'Stopped'
+    };
+    
+    const STEP_SIZE = 8;
+
+    function initCanvas() {
+        canvas = document.getElementById('pathCanvas');
+        ctx = canvas.getContext('2d');
+        canvas.width = canvasWidth;
+        canvas.height = canvasHeight;
+        drawCanvas();
+    }
+    
+    function drawCanvas() {
+        if (!ctx) return;
+        ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+        
+        ctx.strokeStyle = "#e0e0e0";
+        ctx.lineWidth = 0.5;
+        for (let i = 0; i < canvasWidth; i += 25) {
+            ctx.beginPath();
+            ctx.moveTo(i, 0);
+            ctx.lineTo(i, canvasHeight);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(0, i);
+            ctx.lineTo(canvasWidth, i);
+            ctx.stroke();
+        }
+        
+        if (pathPoints.length > 1) {
+            ctx.beginPath();
+            ctx.strokeStyle = "#007aff";
+            ctx.lineWidth = 3;
+            ctx.lineCap = "round";
+            ctx.moveTo(pathPoints[0].x, pathPoints[0].y);
+            for (let i = 1; i < pathPoints.length; i++) {
+                ctx.lineTo(pathPoints[i].x, pathPoints[i].y);
+            }
+            ctx.stroke();
+        }
+        
+        ctx.font = `${Math.floor(canvasWidth / 6)}px "Segoe UI Emoji"`;
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillStyle = "#1c1c1e";
+        ctx.fillText(currentAnimal, currentX, currentY);
+    }
+    
+    function updatePosition(direction) {
+        let newX = currentX;
+        let newY = currentY;
+        
+        switch(direction) {
+            case 'F': newY -= STEP_SIZE; break;  
+            case 'B': newY += STEP_SIZE; break;  
+            case 'L': newX -= STEP_SIZE; break;  
+            case 'R': newX += STEP_SIZE; break;  
+            default: return false;
+        }
+        
+        newX = Math.min(Math.max(newX, 20), canvasWidth - 20);
+        newY = Math.min(Math.max(newY, 20), canvasHeight - 20);
+        
+        if (newX !== currentX || newY !== currentY) {
+            currentX = newX;
+            currentY = newY;
+            pathPoints.push({x: currentX, y: currentY});
+            drawCanvas();
+            
+            const infoDiv = document.getElementById("spottingInfo");
+            if (infoDiv) {
+                infoDiv.innerHTML = `🎨 ${petName} is drawing! Steps: ${pathPoints.length}`;
+            }
+            return true;
+        }
+        return false;
+    }
+    
+    function clearCanvas() {
+        pathPoints = [{x: canvasWidth / 2, y: canvasHeight / 2}];
+        currentX = canvasWidth / 2;
+        currentY = canvasHeight / 2;
+        drawCanvas();
+        const infoDiv = document.getElementById("spottingInfo");
+        if (infoDiv) infoDiv.innerHTML = `🎨 Canvas cleared! Start drawing again...`;
+    }
+    
+    function loadProfile() {
+        let n = localStorage.getItem("petName");
+        let t = localStorage.getItem("petType");
+        let a = localStorage.getItem("selectedAnimal");
+        if(n) petName = n;
+        if(t) petType = t;
+        if(a) currentAnimal = a;
+        document.getElementById("petName").value = petName;
+        document.getElementById("petType").value = petType;
+        
+        document.querySelectorAll('.animal-btn').forEach(btn => {
+            if (btn.dataset.animal === currentAnimal) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+    }
+    
+    function savePetProfile() {
+        petName = document.getElementById("petName").value || "Buddy";
+        petType = document.getElementById("petType").value;
+        localStorage.setItem("petName", petName);
+        localStorage.setItem("petType", petType);
+        closeAllPanels();
+        document.getElementById("modeSelect").style.display = "block";
+    }
+    
+    function showSetup() {
+        closeAllPanels();
+        document.getElementById("setupPanel").style.display = "block";
+    }
+    
+    function closeAllPanels() {
+        document.getElementById("modeSelect").style.display = "none";
+        document.getElementById("controls").style.display = "none";
+        document.getElementById("petMainPanel").style.display = "none";
+        document.getElementById("nbmPanel").style.display = "none";
+        document.getElementById("spottingPanel").style.display = "none";
+        document.getElementById("setupPanel").style.display = "none";
+    }
+    
+    async function startBLE() {
+        try {
+            device = await navigator.bluetooth.requestDevice({
+                filters: [{ name: 'CAR_CONTROL' }],
+                optionalServices: ['0000ffe0-0000-1000-8000-00805f9b34fb']
+            });
+            device.addEventListener('gattserverdisconnected', onDisconnected);
+            const server = await device.gatt.connect();
+            const service = await server.getPrimaryService('0000ffe0-0000-1000-8000-00805f9b34fb');
+            characteristic = await service.getCharacteristic('0000ffe1-0000-1000-8000-00805f9b34fb');
+            characteristic.startNotifications();
+            characteristic.addEventListener('characteristicvaluechanged', (e) => {
+                let val = new TextDecoder().decode(e.target.value);
+            });
+            document.getElementById('status').innerText = 'Connected';
+            document.getElementById('status').style.color = '#007aff';
+            document.getElementById('connectBtn').style.display = 'none';
+            document.getElementById('settingsBtn').style.display = 'flex';
+            loadProfile();
+            showSetup();
+        } catch (e) {
+            alert('Connection failed: ' + e.message);
+        }
+    }
+    
+    async function disconnectBLE() {
+        if (device && device.gatt.connected) device.gatt.disconnect();
+        onDisconnected();
+    }
+    
+    function onDisconnected() {
+        characteristic = null;
+        device = null;
+        isWandering = false;
+        isSpotting = false;
+        document.getElementById('status').innerText = 'Disconnected';
+        document.getElementById('status').style.color = '#ff3b30';
+        document.getElementById('connectBtn').style.display = 'block';
+        document.getElementById('settingsBtn').style.display = 'none';
+        closeAllPanels();
+    }
+    
+    function sendCmd(cmd) {
+        if(!characteristic) return;
+        characteristic.writeValue(new TextEncoder().encode(cmd)).catch(err => {});
+        
+        if (isSpotting && ['F','B','L','R'].includes(cmd)) {
+            updatePosition(cmd);
+        }
+        
+        if (document.getElementById('controls').style.display === 'block') {
+            const infoDiv = document.getElementById("controlInfo");
+            if (cmd === 'S') {
+                infoDiv.innerHTML = `🐾 ${petName} the ${petType} is now STOPPED`;
+            } else if (directionMap[cmd]) {
+                infoDiv.innerHTML = `🚗 ${petName} is moving ${directionMap[cmd]}`;
+            }
+        }
+    }
+    
+    function enterController() {
+        isSpotting = false;
+        closeAllPanels();
+        document.getElementById('controls').style.display = 'block';
+        sendCmd('S');
+    }
+    
+    function enterPetMain() {
+        isSpotting = false;
+        closeAllPanels();
+        document.getElementById('petMainPanel').style.display = 'block';
+        sendCmd('S');
+    }
+    
+    function startNBM() {
+        isSpotting = false;
+        closeAllPanels();
+        document.getElementById('nbmPanel').style.display = 'block';
+        isWandering = true;
+        document.getElementById("toggleBtn").textContent = "🛑 Stop Wandering";
+        document.getElementById('wanderingText').innerHTML = `🌿 ${petName} the ${petType} is currently <strong>wandering around</strong>...`;
+        sendCmd('M');
+    }
+    
+    function toggleWander() {
+        const btn = document.getElementById("toggleBtn");
+        const txt = document.getElementById("wanderingText");
+        if (isWandering) {
+            sendCmd('S');
+            btn.textContent = "▶️ Resume Wandering";
+            txt.innerHTML = `🛑 ${petName} the ${petType} has stopped wandering`;
+            isWandering = false;
+        } else {
+            sendCmd('M');
+            btn.textContent = "🛑 Stop Wandering";
+            txt.innerHTML = `🌿 ${petName} the ${petType} is currently wandering around...`;
+            isWandering = true;
+        }
+    }
+    
+    function startSpotting() {
+        closeAllPanels();
+        document.getElementById('spottingPanel').style.display = 'block';
+        initCanvas();
+        isSpotting = true;
+        isWandering = false;
+        
+        pathPoints = [{x: canvasWidth / 2, y: canvasHeight / 2}];
+        currentX = canvasWidth / 2;
+        currentY = canvasHeight / 2;
+        drawCanvas();
+        
+        document.getElementById('spottingInfo').innerHTML = `🎨 Use arrow buttons to control pet and draw path`;
+        sendCmd('S');
+    }
+    
+    function backToPetMenu() {
+        sendCmd('S');
+        isWandering = false;
+        isSpotting = false;
+        closeAllPanels();
+        document.getElementById('petMainPanel').style.display = 'block';
+    }
+    
+    function exitToMenu() {
+        sendCmd('S');
+        isWandering = false;
+        isSpotting = false;
+        closeAllPanels();
+        document.getElementById("modeSelect").style.display = "block";
+    }
+    
+    document.querySelectorAll('.animal-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            currentAnimal = btn.dataset.animal;
+            localStorage.setItem("selectedAnimal", currentAnimal);
+            document.querySelectorAll('.animal-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            drawCanvas();
+        });
+    });
+    
+    document.querySelectorAll('.control-btn').forEach(btn => {
+        btn.addEventListener('contextmenu', (e) => e.preventDefault());
+        btn.addEventListener('dragstart', (e) => e.preventDefault());
+        btn.addEventListener('selectstart', (e) => e.preventDefault());
+        btn.addEventListener('pointerdown', (e) => {
+            e.preventDefault();
+            btn.classList.add('pressed');
+            sendCmd(btn.dataset.cmd);
+        });
+        btn.addEventListener('pointerup', (e) => {
+            e.preventDefault();
+            btn.classList.remove('pressed');
+            sendCmd('S');
+        });
+        btn.addEventListener('pointerleave', (e) => {
+            btn.classList.remove('pressed');
+            sendCmd('S');
+        });
+        btn.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            btn.classList.add('pressed');
+            sendCmd(btn.dataset.cmd);
+        });
+        btn.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            btn.classList.remove('pressed');
+            sendCmd('S');
+        });
+    });
+</script>
+</body>
+</html>
+
+                </div>
+            </div>
+        </div>
+        <!-- ====================== 雙視窗結束 ====================== -->
 
         <h3 style="margin:30px 0 10px;" data-lang="en">Project Presentation</h3>
         <h3 style="margin:30px 0 10px;" data-lang="zh">專案簡報</h3>
@@ -724,7 +1447,6 @@
         if (page === 'drone' && window.startDroneSlide) {
             window.startDroneSlide();
         }
-        // 啟動 Digipet 輪播
         if (page === 'digipet' && window.startDigiSlide) {
             window.startDigiSlide();
         }
