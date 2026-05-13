@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Portfolio</title>
+    <title>Chen Siu Hei Jerry Claudius - Portfolio</title>
     <style>
         * {
             margin: 0;
@@ -47,7 +47,7 @@
             position: relative;
         }
 
-        /* 動態幾何背景 */
+        /* 動態背景 */
         .bg-circles {
             position: fixed;
             top: 0;
@@ -66,19 +66,13 @@
         }
 
         @keyframes float {
-            0% {
-                transform: translateY(100vh) scale(1);
-                opacity: 0;
-            }
+            0% { transform: translateY(100vh) scale(1); opacity: 0; }
             20% { opacity: 0.6; }
             80% { opacity: 0.4; }
-            100% {
-                transform: translateY(-100vh) scale(1.2);
-                opacity: 0;
-            }
+            100% { transform: translateY(-100vh) scale(1.2); opacity: 0; }
         }
 
-        /* 頂部導航按鈕 */
+        /* 頂部按鈕 */
         .header {
             position: fixed;
             top: 0;
@@ -100,13 +94,14 @@
             font-size: 14px;
             color: var(--text-main);
             box-shadow: var(--shadow);
+            text-decoration: none;
         }
 
         .top-btn:hover {
             transform: translateY(-2px);
         }
 
-        /* 首頁滿版區塊 */
+        /* 首頁 */
         .hero-top {
             height: 100vh;
             display: flex;
@@ -118,7 +113,7 @@
         }
 
         .hero-top h1 {
-            font-size: 64px;
+            font-size: 52px;
             margin-bottom: 20px;
             letter-spacing: 2px;
         }
@@ -140,6 +135,7 @@
             font-size: 16px;
             cursor: pointer;
             transition: 0.3s;
+            text-decoration: none;
         }
 
         .hero-main-btn:hover {
@@ -147,7 +143,7 @@
             transform: translateY(-3px);
         }
 
-        /* 自我介紹區：左圖右文 */
+        /* 關於我 */
         .about-section {
             max-width: 1200px;
             margin: 100px auto;
@@ -190,6 +186,7 @@
             font-size: 16px;
             cursor: pointer;
             transition: 0.3s;
+            text-decoration: none;
         }
 
         .work-btn:hover {
@@ -197,7 +194,7 @@
             transform: translateY(-3px);
         }
 
-        /* 作品區塊 */
+        /* 作品卡片 */
         .portfolio {
             max-width: 1250px;
             margin: 0 auto 120px;
@@ -225,6 +222,10 @@
             padding: 32px;
             box-shadow: var(--shadow);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
         }
 
         .card:hover {
@@ -247,162 +248,296 @@
             font-weight: 500;
         }
 
-        /* 語言切換隱藏 */
+        /* 語言 */
         [data-lang] { display: none; }
         [data-lang].active { display: block; }
 
-        /* 手機版自動變直排 */
+        /* 響應式 */
         @media(max-width:768px){
-            .about-section{
-                grid-template-columns: 1fr;
-            }
-            .hero-top h1{
-                font-size: 42px;
-            }
+            .about-section{ grid-template-columns: 1fr; }
+            .hero-top h1{ font-size: 38px; }
+            .header { padding: 16px 20px; }
+        }
+
+        /* 詳細頁樣式 */
+        .detail-page {
+            max-width: 900px;
+            margin: 120px auto;
+            padding: 0 30px;
+        }
+
+        .detail-page h2 {
+            font-size: 36px;
+            margin-bottom: 30px;
+        }
+
+        .detail-page p {
+            font-size: 18px;
+            line-height: 1.9;
+            color: var(--text-sub);
+            margin-bottom: 20px;
+        }
+
+        .info-box {
+            background: var(--bg-card);
+            padding: 24px;
+            border-radius: 16px;
+            margin: 30px 0;
+            border: 1px solid var(--border-color);
+        }
+
+        .youtube-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            margin: 30px 0;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .youtube-container iframe {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+        }
+
+        .empty-page {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            padding: 0 20px;
         }
     </style>
 </head>
 <body>
-    <!-- 動態背景 -->
-    <div class="bg-circles" id="bgCircles"></div>
 
-    <!-- 右上角按鈕 -->
+<div class="bg-circles" id="bgCircles"></div>
+
+<!-- 主頁 -->
+<div id="main-page">
     <div class="header">
         <button class="top-btn" id="langBtn">繁體中文</button>
         <button class="top-btn" id="themeBtn">🌓</button>
     </div>
 
-    <!-- 首頁滿版名字+簡介 + 按鈕 -->
     <section class="hero-top">
         <h1 data-lang="en">Chen Siu Hei Jerry Claudius</h1>
         <h1 data-lang="zh">陳兆熙</h1>
-
         <p data-lang="en">Creative Tech Creator | Multimedia & IoT Developer</p>
         <p data-lang="zh">創意科技创作者｜多媒體影像｜物聯網嵌入式開發</p>
-
         <a href="#about" class="hero-main-btn" data-lang="en">View Introduction & Works</a>
         <a href="#about" class="hero-main-btn" data-lang="zh">查看自我介紹與作品</a>
     </section>
 
-    <!-- 自我介紹：左圖 右文字 -->
     <section class="about-section" id="about">
         <img class="about-img" src="https://picsum.photos/id/1005/800/600" alt="Profile">
         <div class="about-content">
             <h2 data-lang="en">About Me</h2>
             <h2 data-lang="zh">關於我</h2>
-
-            <p data-lang="en">
-                Blending computer engineering fundamentals with digital media and creative arts training.
-                Skilled in UI/UX design, prototyping, web and app development across software and hardware.
-                Practiced in MV production, camera work, directing, livestreaming, editing and music remix under professional guidance.
-                Also experienced in motion tracking, 3D modeling and printing to bring creative ideas into realisation.
-            </p>
-            <p data-lang="zh">
-                融合電機工程專業基礎與數位媒體、創意藝術訓練。
-                具備 UI/UX 設計、原型開發、網站與應用程式軟硬體開發能力。
-                受專業指導，熟練 MV 製作、掌鏡運鏡、導播、直播企劃、影像剪輯與音樂重製。
-                同時擁有動態追蹤、3D 建模與 3D 列印經歷，能將創意構想落實為完整作品。
-            </p>
-
+            <p data-lang="en">Blending computer engineering fundamentals with digital media and creative arts training. Skilled in UI/UX design, prototyping, web and app development across software and hardware. Practiced in MV production, camera work, directing, livestreaming, editing and music remix under professional guidance. Also experienced in motion tracking, 3D modeling and printing to bring creative ideas into realisation.</p>
+            <p data-lang="zh">融合電機工程專業基礎與數位媒體、創意藝術訓練。具備 UI/UX 設計、原型開發、網站與應用程式軟硬體開發能力。受專業指導，熟練 MV 製作、掌鏡運鏡、導播、直播企劃、影像剪輯與音樂重製。同時擁有動態追蹤、3D 建模與 3D 列印經歷，能將創意構想落實為完整作品。</p>
             <a href="#portfolio" class="work-btn" data-lang="en">Browse All Works</a>
             <a href="#portfolio" class="work-btn" data-lang="zh">瀏覽所有作品</a>
         </div>
     </section>
 
-    <!-- 作品卡片區 -->
     <section class="portfolio" id="portfolio">
         <h2 class="section-title" data-lang="en">My Works</h2>
         <h2 class="section-title" data-lang="zh">我的作品集</h2>
-
-        
-            <div class="card">
+        <div class="cards">
+            <div class="card" onclick="goPage('art')">
                 <h3 data-lang="en">Art Gallery(Available Currently)</h3>
                 <h3 data-lang="zh">互動藝術展覽</h3>
                 <span class="tools">Website + Light Art + Robotic Motion</span>
             </div>
-            
-            <div class="card">
+            <div class="card" onclick="goPage('mv')">
                 <h3 data-lang="en">MV Production</h3>
                 <h3 data-lang="zh">音樂影像創作</h3>
                 <span class="tools">Final Cut Pro + Logic Pro + Motion + After Effects + MotionCapture</span>
             </div>
-            
-            <div class="card">
+            <div class="card" onclick="goPage('music')">
                 <h3 data-lang="en">Music Production</h3>
                 <h3 data-lang="zh">原創音樂製作</h3>
                 <span class="tools">Logic Pro</span>
             </div>
-            
-            <div class="card">
-                <div class="card">
+            <div class="card" onclick="goPage('digipet')">
                 <h3 data-lang="en">Digipet: Control and Pet Mode</h3>
                 <h3 data-lang="zh">電子寵物：控制與寵物模式</h3>
                 <span class="tools">STM32 + ESP32 + Website</span>
             </div>
-                
-            <div class="card">
+            <div class="card" onclick="goPage('drone')">
                 <h3 data-lang="en">All-IN-ONE Drone</h3>
                 <h3 data-lang="zh">科技研究與虛擬無人機</h3>
                 <span class="tools">Blender</span>
             </div>
-                
-            <div class="cards">    
+            <div class="card" onclick="goPage('plagiarism')">
                 <h3 data-lang="en">Plagiarism Animation Video</h3>
                 <h3 data-lang="zh">英文匯報動畫影片</h3>
                 <span class="tools">Canva + Animator</span>
             </div>
-                
         </div>
     </section>
+</div>
 
-    <script>
-        // 浮動背景圓圈
-        function createCircles() {
-            const container = document.getElementById('bgCircles');
-            const count = 18;
-            for(let i = 0; i < count; i++){
-                const circle = document.createElement('div');
-                circle.classList.add('circle');
-                let size = Math.random() * 80 + 20;
-                circle.style.width = size + 'px';
-                circle.style.height = size + 'px';
-                circle.style.left = Math.random() * 100 + '%';
-                circle.style.animationDelay = Math.random() * 20 + 's';
-                circle.style.animationDuration = Math.random() * 10 + 15 + 's';
-                container.appendChild(circle);
-            }
+// 以下為所有子頁面（隱藏）
+<div id="plagiarism-page" style="display:none;">
+    <div class="header">
+        <button class="top-btn" onclick="backToMain()">← Back</button>
+        <button class="top-btn" id="langBtn2">繁體中文</button>
+        <button class="top-btn" id="themeBtn2">🌓</button>
+    </div>
+    <div class="detail-page">
+        <h2 data-lang="en">Plagiarism Animation Video</h2>
+        <h2 data-lang="zh">英文匯報動畫影片</h2>
+        <p data-lang="en">This is an educational animation explaining the concept, harms, and prevention of plagiarism.</p>
+        <p data-lang="zh">這是一支教育動畫，解釋抄襲的定義、危害與預防方法。</p>
+        <div class="info-box">
+            <p data-lang="en"><strong>Duration:</strong> 2 minutes 15 seconds</p>
+            <p data-lang="zh"><strong>時長：</strong>2分15秒</p>
+            <p data-lang="en"><strong>Production Team:</strong> Chen Siu Hei (Creator, Editor, Animator)</p>
+            <p data-lang="zh"><strong>製作名單：</strong>陳兆熙（創作者、剪輯、動畫）</p>
+        </div>
+        <div class="youtube-container">
+            <iframe src="https://www.youtube.com/embed/n0SewmO2gq8" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+</div>
+
+<div id="art-page" style="display:none;">
+    <div class="header">
+        <button class="top-btn" onclick="backToMain()">← Back</button>
+        <button class="top-btn" id="langBtn3">繁體中文</button>
+        <button class="top-btn" id="themeBtn3">🌓</button>
+    </div>
+    <div class="empty-page">
+        <h2 data-lang="en">Art Gallery</h2>
+        <h2 data-lang="zh">互動藝術展覽</h2>
+        <p data-lang="en">Coming soon</p>
+        <p data-lang="zh">即將推出</p>
+    </div>
+</div>
+
+<div id="mv-page" style="display:none;">
+    <div class="header">
+        <button class="top-btn" onclick="backToMain()">← Back</button>
+        <button class="top-btn" id="langBtn4">繁體中文</button>
+        <button class="top-btn" id="themeBtn4">🌓</button>
+    </div>
+    <div class="empty-page">
+        <h2 data-lang="en">MV Production</h2>
+        <h2 data-lang="zh">音樂影像創作</h2>
+        <p data-lang="en">Coming soon</p>
+        <p data-lang="zh">即將推出</p>
+    </div>
+</div>
+
+<div id="music-page" style="display:none;">
+    <div class="header">
+        <button class="top-btn" onclick="backToMain()">← Back</button>
+        <button class="top-btn" id="langBtn5">繁體中文</button>
+        <button class="top-btn" id="themeBtn5">🌓</button>
+    </div>
+    <div class="empty-page">
+        <h2 data-lang="en">Music Production</h2>
+        <h2 data-lang="zh">原創音樂製作</h2>
+        <p data-lang="en">Coming soon</p>
+        <p data-lang="zh">即將推出</p>
+    </div>
+</div>
+
+<div id="digipet-page" style="display:none;">
+    <div class="header">
+        <button class="top-btn" onclick="backToMain()">← Back</button>
+        <button class="top-btn" id="langBtn6">繁體中文</button>
+        <button class="top-btn" id="themeBtn6">🌓</button>
+    </div>
+    <div class="empty-page">
+        <h2 data-lang="en">Digipet</h2>
+        <h2 data-lang="zh">電子寵物</h2>
+        <p data-lang="en">Coming soon</p>
+        <p data-lang="zh">即將推出</p>
+    </div>
+</div>
+
+<div id="drone-page" style="display:none;">
+    <div class="header">
+        <button class="top-btn" onclick="backToMain()">← Back</button>
+        <button class="top-btn" id="langBtn7">繁體中文</button>
+        <button class="top-btn" id="themeBtn7">🌓</button>
+    </div>
+    <div class="empty-page">
+        <h2 data-lang="en">All-IN-ONE Drone</h2>
+        <h2 data-lang="zh">科技研究與虛擬無人機</h2>
+        <p data-lang="en">Coming soon</p>
+        <p data-lang="zh">即將推出</p>
+    </div>
+</div>
+
+<script>
+    // 背景
+    function createCircles() {
+        const container = document.getElementById('bgCircles');
+        for(let i=0;i<18;i++){
+            const c = document.createElement('div');
+            c.classList.add('circle');
+            let s = Math.random()*80+20;
+            c.style.width = s+'px'; c.style.height = s+'px';
+            c.style.left = Math.random()*100+'%';
+            c.style.animationDelay = Math.random()*20+'s';
+            c.style.animationDuration = Math.random()*10+15+'s';
+            container.appendChild(c);
         }
-        createCircles();
+    }
+    createCircles();
 
-        // 語言切換
-        const langBtn = document.getElementById('langBtn');
-        let isEn = true;
-        document.querySelectorAll('[data-lang="en"]').forEach(el=>el.classList.add('active'));
+    // 頁面切換
+    function goPage(page) {
+        document.getElementById('main-page').style.display = 'none';
+        document.getElementById(page+'-page').style.display = 'block';
+        syncLangAll(); syncThemeAll();
+    }
 
-        langBtn.addEventListener('click',()=>{
-            isEn = !isEn;
-            if(isEn){
-                document.querySelectorAll('[data-lang="en"]').forEach(el=>el.classList.add('active'));
-                document.querySelectorAll('[data-lang="zh"]').forEach(el=>el.classList.remove('active'));
-                langBtn.innerText = '繁體中文';
-                document.documentElement.lang = 'en';
-            }else{
-                document.querySelectorAll('[data-lang="zh"]').forEach(el=>el.classList.add('active'));
-                document.querySelectorAll('[data-lang="en"]').forEach(el=>el.classList.remove('active'));
-                langBtn.innerText = 'English';
-                document.documentElement.lang = 'zh-TW';
-            }
+    function backToMain() {
+        document.querySelectorAll('[id$="-page"]').forEach(p=>p.style.display='none');
+        document.getElementById('main-page').style.display = 'block';
+    }
+
+    // 語言
+    let isEn = true;
+    function setLang(lang) {
+        isEn = lang;
+        document.querySelectorAll('[data-lang="en"]').forEach(e=>e.classList.toggle('active',lang));
+        document.querySelectorAll('[data-lang="zh"]').forEach(e=>e.classList.toggle('active',!lang));
+        document.documentElement.lang = lang ? 'en' : 'zh-TW';
+        const btns = document.querySelectorAll('[id^="langBtn"]');
+        btns.forEach(b=>b.innerText = lang ? '繁體中文' : 'English');
+    }
+
+    function syncLangAll() {
+        const btns = document.querySelectorAll('[id^="langBtn"]');
+        btns.forEach((b,i)=>{
+            b.onclick = ()=>{ setLang(!isEn); };
         });
+    }
 
-        // 黑白主題記憶
-        const themeBtn = document.getElementById('themeBtn');
-        let dark = localStorage.getItem('darkMode') === 'on';
-        if(dark) document.body.classList.add('dark-mode');
-
-        themeBtn.addEventListener('click',()=>{
-            document.body.classList.toggle('dark-mode');
-            localStorage.setItem('darkMode', document.body.classList.contains('dark-mode')?'on':'off');
+    // 主題
+    function syncThemeAll() {
+        const t = document.body.classList.contains('dark-mode');
+        const ts = document.querySelectorAll('[id^="themeBtn"]');
+        ts.forEach((b,i)=>{
+            b.onclick = ()=>{
+                document.body.classList.toggle('dark-mode');
+                localStorage.setItem('darkMode', document.body.classList.contains('dark-mode')?'on':'off');
+            };
         });
-    </script>
+    }
+
+    // 初始化
+    document.querySelectorAll('[data-lang="en"]').forEach(e=>e.classList.add('active'));
+    if(localStorage.getItem('darkMode')==='on') document.body.classList.add('dark-mode');
+    syncLangAll(); syncThemeAll();
+</script>
 </body>
 </html>
