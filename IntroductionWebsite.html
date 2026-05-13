@@ -373,8 +373,8 @@
                 <span class="tools">Blender</span>
             </div>
             <div class="card" onclick="goPage('plagiarism')">
-                <h3 data-lang="en">Plagiarism Animation Video</h3>
-                <h3 data-lang="zh">英文匯報動畫影片</h3>
+                <h3 data-lang="en">Animation Video [The Plagiarism]</h3>
+                <h3 data-lang="zh">動畫影片 [借鋻還是抄襲？]</h3>
                 <span class="tools">Canva + Animator</span>
             </div>
         </div>
@@ -475,11 +475,57 @@
         <button class="top-btn" id="langBtn7">繁體中文</button>
         <button class="top-btn" id="themeBtn7">🌓</button>
     </div>
-    <div class="empty-page">
-        <h2 data-lang="en">All-IN-ONE Drone</h2>
-        <h2 data-lang="zh">科技研究與虛擬無人機</h2>
-        <p data-lang="en">Coming soon</p>
-        <p data-lang="zh">即將推出</p>
+
+    <!-- 圖片+影片 跑馬燈輪播 -->
+    <div class="marquee-wrap" style="width:100%; overflow:hidden; margin-top:80px;">
+        <div class="marquee-content" id="droneMarquee" style="display:flex; gap:20px; animation:marqueeMove 40s linear infinite;">
+            <!-- 這裡放你的橫版圖片/MP4，後續自行增減 -->
+            <video autoplay muted loop playsinline style="height:220px; border-radius:12px; flex-shrink:0;">
+                <source src="your-video.mp4" type="video/mp4">
+            </video>
+            <img src="https://picsum.photos/800/450" style="height:220px; border-radius:12px; object-fit:cover; flex-shrink:0;">
+            <img src="https://picsum.photos/801/450" style="height:220px; border-radius:12px; object-fit:cover; flex-shrink:0;">
+            <img src="https://picsum.photos/802/450" style="height:220px; border-radius:12px; object-fit:cover; flex-shrink:0;">
+            <!-- 複製上面区块可無限加圖片/影片 -->
+        </div>
+    </div>
+
+    <style>
+        @keyframes marqueeMove {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+    </style>
+
+    <div class="detail-page">
+        <h2 data-lang="en">All-IN-ONE Drone Project</h2>
+        <h2 data-lang="zh">科技研究與虛擬無人機專案</h2>
+
+        <p data-lang="en">
+            This project focuses on UAV structural design, aerodynamic simulation and 3D virtual drone modeling.
+            Using Blender for full 3D asset creation, mechanical assembly simulation and scene environment building.
+            The research also includes drone flight principle analysis, power system matching and future application prospects in delivery, inspection and aerial photography.
+        </p>
+        <p data-lang="zh">
+            本專案聚焦無人機結構設計、空氣動力模擬與虛擬無人機 3D 建模。
+            透過 Blender 完成完整三維資產建模、機械結構組裝模擬與場景環境搭建。
+            同時研究無人機飛行原理、動力系統匹配，以及在物流配送、巡檢、空拍領域的未來應用發展。
+        </p>
+
+        <div class="info-box">
+            <p data-lang="en"><strong>Release Date:</strong> 15/05/2026</p>
+            <p data-lang="zh"><strong>發佈日期：</strong> 15/05/2026</p>
+            <p data-lang="en"><strong>Duration / Scale:</strong> 3D Modeling & Research Project</p>
+            <p data-lang="zh"><strong>內容規模：</strong> 3D建模 + 學術研究專案</p>
+            <p data-lang="en"><strong>Production:</strong> Jerry Claudius Chen (3D Designer & Researcher)</p>
+            <p data-lang="zh"><strong>製作：</strong> 陳兆熙（3D建模設計 & 專案研究）</p>
+        </div>
+
+        <!-- 下方獨立影片展示區 -->
+        <div class="youtube-container">
+            <!-- 後續換成你的無人機展示影片 -->
+            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+        </div>
     </div>
 </div>
 
