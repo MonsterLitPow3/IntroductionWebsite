@@ -37,6 +37,7 @@
             --tag-bg: #1e293b;
             --tag-color: #60a5fa;
             --btn-bg: #3b82f6;
+            --btn-text: #fff;
         }
 
         body {
@@ -145,7 +146,7 @@
             margin: 100px auto;
             padding: 0 30px;
             display: grid;
-            grid-template-columns: 1fr 1;
+            grid-template-columns: 1fr 1fr;
             gap: 50px;
             align-items: center;
         }
@@ -334,7 +335,6 @@
             transition: background 0.3s ease;
         }
 
-        /* 雙視窗樣式 */
         .dual-window {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -518,7 +518,6 @@
     </div>
 </div>
 
-<!-- ====================== 已修改：Digipet 頁面 ====================== -->
 <div id="digipet-page" style="display:none;">
     <div class="header">
         <button class="top-btn" onclick="backToMain()">← Back</button>
@@ -531,10 +530,9 @@
         <h2 style="text-align:center;" data-lang="zh">電子寵物：控制與寵物模式</h2>
         <div style="margin:30px 0;"></div>
 
-        <!-- 輪播：已放入你指定的3個檔案 -->
         <div class="slideshow-container">
             <div class="slide" data-type="video">
-                <video muted playsinline>
+                <video muted playsinline loop>
                     <source src="4demovideo.mp4" type="video/mp4">
                 </video>
             </div>
@@ -572,28 +570,24 @@
             <p data-lang="zh"><strong>製作：</strong> 陳兆熙</p>
         </div>
 
-        <!-- ====================== 雙迷你視窗：網站 + 代碼 ====================== -->
         <h3 style="margin:30px 0 10px;">Web Interface & Source Code</h3>
         <p class="note">⚠️ 只供參考，無法連上藍牙因爲裝置要在範圍内</p>
 
         <div class="dual-window">
-            <!-- 左：網站預覽 -->
             <div class="window-box">
                 <h4>Website Preview</h4>
                 <iframe src="https://monsterlitpow3.github.io/30_Project/index_2.html"></iframe>
             </div>
 
-            <!-- 右：代碼區（你自己填） -->
             <div class="window-box">
                 <h4>Source Code</h4>
-                <div class="code-area" id="codeArea">
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Digipet Smart Car - Spotting Mode</title>
-    <style>
+<div class="code-area" id="codeArea">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"&gt;
+    &lt;title&gt;Digipet Smart Car - Spotting Mode&lt;/title&gt;
+    &lt;style&gt;
         * { 
             margin: 0; 
             padding: 0; 
@@ -675,7 +669,6 @@
             margin-top: 16px; 
         }
 
-        /* 画板样式 */
         .spotting-panel {
             background: #f9f9fb;
             padding: 16px;
@@ -831,103 +824,103 @@
             background: #ff3b30 !important;
             margin-top: 12px;
         }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="settings-icon" id="settingsBtn" onclick="showSetup()">⚙️</div>
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="container"&gt;
+        &lt;div class="settings-icon" id="settingsBtn" onclick="showSetup()"&gt;⚙️&lt;/div&gt;
 
-        <h1 class="title">Digipet Car</h1>
-        <div id="status" style="color: #ff3b30;">Disconnected</div>
+        &lt;h1 class="title"&gt;Digipet Car&lt;/h1&gt;
+        &lt;div id="status" style="color: #ff3b30;"&gt;Disconnected&lt;/div&gt;
 
-        <button class="connect-btn" id="connectBtn" onclick="startBLE()">Connect BLE</button>
+        &lt;button class="connect-btn" id="connectBtn" onclick="startBLE()"&gt;Connect BLE&lt;/button&gt;
 
-        <div class="mode-select" id="modeSelect">
-            <button class="mode-btn" onclick="enterController()">🎮 Controller Mode</button>
-            <button class="mode-btn" onclick="enterPetMain()">🐾 Pet Mode</button>
-            <button class="mode-btn disconnect-btn" onclick="disconnectBLE()">🔌 Disconnect</button>
-        </div>
+        &lt;div class="mode-select" id="modeSelect"&gt;
+            &lt;button class="mode-btn" onclick="enterController()"&gt;🎮 Controller Mode&lt;/button&gt;
+            &lt;button class="mode-btn" onclick="enterPetMain()"&gt;🐾 Pet Mode&lt;/button&gt;
+            &lt;button class="mode-btn disconnect-btn" onclick="disconnectBLE()"&gt;🔌 Disconnect&lt;/button&gt;
+        &lt;/div&gt;
 
-        <div class="control-panel" id="controls">
-            <div class="control-info" id="controlInfo">🎮 Ready to control</div>
-            <div class="btn-grid">
-                <div class="row"><button class="control-btn" data-cmd="F">▲</button></div>
-                <div class="row">
-                    <button class="control-btn" data-cmd="L">◀</button>
-                    <button class="control-btn stop-btn" data-cmd="S">●</button>
-                    <button class="control-btn" data-cmd="R">▶</button>
-                </div>
-                <div class="row"><button class="control-btn" data-cmd="B">▼</button></div>
-                <div class="row">
-                    <button class="control-btn" data-cmd="A">↺</button>
-                    <button class="control-btn" data-cmd="C">↻</button>
-                </div>
-            </div>
-            <button class="mode-btn back-btn" onclick="exitToMenu()">Back to Menu</button>
-            <button class="mode-btn disconnect-btn" onclick="disconnectBLE()">Disconnect</button>
-        </div>
+        &lt;div class="control-panel" id="controls"&gt;
+            &lt;div class="control-info" id="controlInfo"&gt;🎮 Ready to control&lt;/div&gt;
+            &lt;div class="btn-grid"&gt;
+                &lt;div class="row"&gt;&lt;button class="control-btn" data-cmd="F"&gt;▲&lt;/button&gt;&lt;/div&gt;
+                &lt;div class="row"&gt;
+                    &lt;button class="control-btn" data-cmd="L"&gt;◀&lt;/button&gt;
+                    &lt;button class="control-btn stop-btn" data-cmd="S"&gt;●&lt;/button&gt;
+                    &lt;button class="control-btn" data-cmd="R"&gt;▶&lt;/button&gt;
+                &lt;/div&gt;
+                &lt;div class="row"&gt;&lt;button class="control-btn" data-cmd="B"&gt;▼&lt;/button&gt;&lt;/div&gt;
+                &lt;div class="row"&gt;
+                    &lt;button class="control-btn" data-cmd="A"&gt;↺&lt;/button&gt;
+                    &lt;button class="control-btn" data-cmd="C"&gt;↻&lt;/button&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;button class="mode-btn back-btn" onclick="exitToMenu()"&gt;Back to Menu&lt;/button&gt;
+            &lt;button class="mode-btn disconnect-btn" onclick="disconnectBLE()"&gt;Disconnect&lt;/button&gt;
+        &lt;/div&gt;
 
-        <div class="pet-main-panel" id="petMainPanel">
-            <button class="mode-btn" onclick="startNBM()">🌿 Natural Behaviour Mode</button>
-            <button class="mode-btn" onclick="startSpotting()">🎨 Spotting Mode (Draw)</button>
-            <button class="mode-btn back-btn" onclick="exitToMenu()">Back to Main Menu</button>
-            <button class="mode-btn disconnect-btn" onclick="disconnectBLE()">Disconnect</button>
-        </div>
+        &lt;div class="pet-main-panel" id="petMainPanel"&gt;
+            &lt;button class="mode-btn" onclick="startNBM()"&gt;🌿 Natural Behaviour Mode&lt;/button&gt;
+            &lt;button class="mode-btn" onclick="startSpotting()"&gt;🎨 Spotting Mode (Draw)&lt;/button&gt;
+            &lt;button class="mode-btn back-btn" onclick="exitToMenu()"&gt;Back to Main Menu&lt;/button&gt;
+            &lt;button class="mode-btn disconnect-btn" onclick="disconnectBLE()"&gt;Disconnect&lt;/button&gt;
+        &lt;/div&gt;
 
-        <div class="nbm-active-panel" id="nbmPanel">
-            <div class="status-text" id="wanderingText">Your pet is wandering...</div>
-            <button class="mode-btn" id="toggleBtn" onclick="toggleWander()">🛑 Stop Wandering</button>
-            <button class="mode-btn back-btn" onclick="backToPetMenu()">Back to Pet Menu</button>
-            <button class="mode-btn disconnect-btn" onclick="disconnectBLE()">Disconnect</button>
-        </div>
+        &lt;div class="nbm-active-panel" id="nbmPanel"&gt;
+            &lt;div class="status-text" id="wanderingText"&gt;Your pet is wandering...&lt;/div&gt;
+            &lt;button class="mode-btn" id="toggleBtn" onclick="toggleWander()"&gt;🛑 Stop Wandering&lt;/button&gt;
+            &lt;button class="mode-btn back-btn" onclick="backToPetMenu()"&gt;Back to Pet Menu&lt;/button&gt;
+            &lt;button class="mode-btn disconnect-btn" onclick="disconnectBLE()"&gt;Disconnect&lt;/button&gt;
+        &lt;/div&gt;
 
-        <div class="spotting-panel" id="spottingPanel">
-            <div class="animal-select">
-                <button class="animal-btn" data-animal="🐶">🐶</button>
-                <button class="animal-btn" data-animal="🐱">🐱</button>
-                <button class="animal-btn" data-animal="🐷">🐷</button>
-                <button class="animal-btn" data-animal="🐰">🐰</button>
-                <button class="animal-btn" data-animal="🐻">🐻</button>
-                <button class="animal-btn" data-animal="🐼">🐼</button>
-            </div>
-            <div class="canvas-container">
-                <canvas id="pathCanvas" width="350" height="350" style="width:350px;height:350px"></canvas>
-            </div>
-            <div class="spotting-controls">
-                <button class="clear-canvas-btn" onclick="clearCanvas()">🗑 Clear Path</button>
-                <button class="back-btn" onclick="backToPetMenu()">Back</button>
-            </div>
-            <div class="control-info" id="spottingInfo">🎨 Use arrow buttons to draw your pet path</div>
-            <div class="btn-grid" style="margin-top:15px;">
-                <div class="row"><button class="control-btn" data-cmd="F">▲</button></div>
-                <div class="row">
-                    <button class="control-btn" data-cmd="L">◀</button>
-                    <button class="control-btn stop-btn" data-cmd="S">●</button>
-                    <button class="control-btn" data-cmd="R">▶</button>
-                </div>
-                <div class="row"><button class="control-btn" data-cmd="B">▼</button></div>
-            </div>
-            <button class="mode-btn disconnect-btn" onclick="disconnectBLE()">Disconnect</button>
-        </div>
+        &lt;div class="spotting-panel" id="spottingPanel"&gt;
+            &lt;div class="animal-select"&gt;
+                &lt;button class="animal-btn" data-animal="🐶"&gt;🐶&lt;/button&gt;
+                &lt;button class="animal-btn" data-animal="🐱"&gt;🐱&lt;/button&gt;
+                &lt;button class="animal-btn" data-animal="🐷"&gt;🐷&lt;/button&gt;
+                &lt;button class="animal-btn" data-animal="🐰"&gt;🐰&lt;/button&gt;
+                &lt;button class="animal-btn" data-animal="🐻"&gt;🐻&lt;/button&gt;
+                &lt;button class="animal-btn" data-animal="🐼"&gt;🐼&lt;/button&gt;
+            &lt;/div&gt;
+            &lt;div class="canvas-container"&gt;
+                &lt;canvas id="pathCanvas" width="350" height="350" style="width:350px;height:350px"&gt;&lt;/canvas&gt;
+            &lt;/div&gt;
+            &lt;div class="spotting-controls"&gt;
+                &lt;button class="clear-canvas-btn" onclick="clearCanvas()"&gt;🗑 Clear Path&lt;/button&gt;
+                &lt;button class="back-btn" onclick="backToPetMenu()"&gt;Back&lt;/button&gt;
+            &lt;/div&gt;
+            &lt;div class="control-info" id="spottingInfo"&gt;🎨 Use arrow buttons to draw your pet path&lt;/div&gt;
+            &lt;div class="btn-grid" style="margin-top:15px;"&gt;
+                &lt;div class="row"&gt;&lt;button class="control-btn" data-cmd="F"&gt;▲&lt;/button&gt;&lt;/div&gt;
+                &lt;div class="row"&gt;
+                    &lt;button class="control-btn" data-cmd="L"&gt;◀&lt;/button&gt;
+                    &lt;button class="control-btn stop-btn" data-cmd="S"&gt;●&lt;/button&gt;
+                    &lt;button class="control-btn" data-cmd="R"&gt;▶&lt;/button&gt;
+                &lt;/div&gt;
+                &lt;div class="row"&gt;&lt;button class="control-btn" data-cmd="B"&gt;▼&lt;/button&gt;&lt;/div&gt;
+            &lt;/div&gt;
+            &lt;button class="mode-btn disconnect-btn" onclick="disconnectBLE()"&gt;Disconnect&lt;/button&gt;
+        &lt;/div&gt;
 
-        <div class="setup-panel" id="setupPanel">
-            <div class="setup-title">Pet Profile</div>
-            <div class="input-group">
-                <label>Pet Name</label>
-                <input type="text" id="petName" placeholder="e.g. Lucky, Momo">
-            </div>
-            <div class="input-group">
-                <label>Pet Type</label>
-                <select id="petType">
-                    <option>Dog</option><option>Cat</option><option>Pig</option>
-                    <option>Rabbit</option><option>Bear</option>
-                </select>
-            </div>
-            <button class="save-btn" onclick="savePetProfile()">Save & Continue</button>
-        </div>
-    </div>
+        &lt;div class="setup-panel" id="setupPanel"&gt;
+            &lt;div class="setup-title"&gt;Pet Profile&lt;/div&gt;
+            &lt;div class="input-group"&gt;
+                &lt;label&gt;Pet Name&lt;/label&gt;
+                &lt;input type="text" id="petName" placeholder="e.g. Lucky, Momo"&gt;
+            &lt;/div&gt;
+            &lt;div class="input-group"&gt;
+                &lt;label&gt;Pet Type&lt;/label&gt;
+                &lt;select id="petType"&gt;
+                    &lt;option&gt;Dog&lt;/option&gt;&lt;option&gt;Cat&lt;/option&gt;&lt;option&gt;Pig&lt;/option&gt;
+                    &lt;option&gt;Rabbit&lt;/option&gt;&lt;option&gt;Bear&lt;/option&gt;
+                &lt;/select&gt;
+            &lt;/div&gt;
+            &lt;button class="save-btn" onclick="savePetProfile()"&gt;Save &amp; Continue&lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
 
-<script>
+&lt;script&gt;
     let characteristic = null;
     let device = null;
     let petName = "My Pet";
@@ -963,7 +956,7 @@
         
         ctx.strokeStyle = "#e0e0e0";
         ctx.lineWidth = 0.5;
-        for (let i = 0; i < canvasWidth; i += 25) {
+        for (let i = 0; i &lt; canvasWidth; i += 25) {
             ctx.beginPath();
             ctx.moveTo(i, 0);
             ctx.lineTo(i, canvasHeight);
@@ -974,13 +967,13 @@
             ctx.stroke();
         }
         
-        if (pathPoints.length > 1) {
+        if (pathPoints.length &gt; 1) {
             ctx.beginPath();
             ctx.strokeStyle = "#007aff";
             ctx.lineWidth = 3;
             ctx.lineCap = "round";
             ctx.moveTo(pathPoints[0].x, pathPoints[0].y);
-            for (let i = 1; i < pathPoints.length; i++) {
+            for (let i = 1; i &lt; pathPoints.length; i++) {
                 ctx.lineTo(pathPoints[i].x, pathPoints[i].y);
             }
             ctx.stroke();
@@ -1042,7 +1035,7 @@
         document.getElementById("petName").value = petName;
         document.getElementById("petType").value = petType;
         
-        document.querySelectorAll('.animal-btn').forEach(btn => {
+        document.querySelectorAll('.animal-btn').forEach(btn =&gt; {
             if (btn.dataset.animal === currentAnimal) {
                 btn.classList.add('active');
             } else {
@@ -1085,7 +1078,7 @@
             const service = await server.getPrimaryService('0000ffe0-0000-1000-8000-00805f9b34fb');
             characteristic = await service.getCharacteristic('0000ffe1-0000-1000-8000-00805f9b34fb');
             characteristic.startNotifications();
-            characteristic.addEventListener('characteristicvaluechanged', (e) => {
+            characteristic.addEventListener('characteristicvaluechanged', (e) =&gt; {
                 let val = new TextDecoder().decode(e.target.value);
             });
             document.getElementById('status').innerText = 'Connected';
@@ -1118,7 +1111,7 @@
     
     function sendCmd(cmd) {
         if(!characteristic) return;
-        characteristic.writeValue(new TextEncoder().encode(cmd)).catch(err => {});
+        characteristic.writeValue(new TextEncoder().encode(cmd)).catch(err =&gt; {});
         
         if (isSpotting && ['F','B','L','R'].includes(cmd)) {
             updatePosition(cmd);
@@ -1154,7 +1147,7 @@
         document.getElementById('nbmPanel').style.display = 'block';
         isWandering = true;
         document.getElementById("toggleBtn").textContent = "🛑 Stop Wandering";
-        document.getElementById('wanderingText').innerHTML = `🌿 ${petName} the ${petType} is currently <strong>wandering around</strong>...`;
+        document.getElementById('wanderingText').innerHTML = `🌿 ${petName} the ${petType} is currently &lt;strong&gt;wandering around&lt;/strong&gt;...`;
         sendCmd('M');
     }
     
@@ -1206,58 +1199,55 @@
         document.getElementById("modeSelect").style.display = "block";
     }
     
-    document.querySelectorAll('.animal-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
+    document.querySelectorAll('.animal-btn').forEach(btn =&gt; {
+        btn.addEventListener('click', () =&gt; {
             currentAnimal = btn.dataset.animal;
             localStorage.setItem("selectedAnimal", currentAnimal);
-            document.querySelectorAll('.animal-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.animal-btn').forEach(b =&gt; b.classList.remove('active'));
             btn.classList.add('active');
             drawCanvas();
         });
     });
     
-    document.querySelectorAll('.control-btn').forEach(btn => {
-        btn.addEventListener('contextmenu', (e) => e.preventDefault());
-        btn.addEventListener('dragstart', (e) => e.preventDefault());
-        btn.addEventListener('selectstart', (e) => e.preventDefault());
-        btn.addEventListener('pointerdown', (e) => {
+    document.querySelectorAll('.control-btn').forEach(btn =&gt; {
+        btn.addEventListener('contextmenu', (e) =&gt; e.preventDefault());
+        btn.addEventListener('dragstart', (e) =&gt; e.preventDefault());
+        btn.addEventListener('selectstart', (e) =&gt; e.preventDefault());
+        btn.addEventListener('pointerdown', (e) =&gt; {
             e.preventDefault();
             btn.classList.add('pressed');
             sendCmd(btn.dataset.cmd);
         });
-        btn.addEventListener('pointerup', (e) => {
+        btn.addEventListener('pointerup', (e) =&gt; {
             e.preventDefault();
             btn.classList.remove('pressed');
             sendCmd('S');
         });
-        btn.addEventListener('pointerleave', (e) => {
+        btn.addEventListener('pointerleave', (e) =&gt; {
             btn.classList.remove('pressed');
             sendCmd('S');
         });
-        btn.addEventListener('touchstart', (e) => {
+        btn.addEventListener('touchstart', (e) =&gt; {
             e.preventDefault();
             btn.classList.add('pressed');
             sendCmd(btn.dataset.cmd);
         });
-        btn.addEventListener('touchend', (e) => {
+        btn.addEventListener('touchend', (e) =&gt; {
             e.preventDefault();
             btn.classList.remove('pressed');
             sendCmd('S');
         });
     });
-</script>
-</body>
-</html>
-
-                </div>
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</div>
             </div>
         </div>
-        <!-- ====================== 雙視窗結束 ====================== -->
 
         <h3 style="margin:30px 0 10px;" data-lang="en">Project Presentation</h3>
         <h3 style="margin:30px 0 10px;" data-lang="zh">專案簡報</h3>
         <div class="youtube-container">
-            <iframe src="https://1drv.ms/p/c/c7d3dcba83a12d37/IQCCmzFP1r-MTJGQE8KNEvMTAfAbskmL1jH8x4neJ-MisnY?e=YJTJKn" frameborder="0" allowfullscreen></iframe>
+            <iframe src="https://1drv.ms/p/c/c7d3dcba83a12d37/IQSCmzFP1r-MTJGQE8KNEvMTAQvpd4SGRH2TY1CPETmZuDE" frameborder="0" allowfullscreen></iframe>
         </div>
     </div>
 
@@ -1304,7 +1294,6 @@
         };
     </script>
 </div>
-<!-- ====================== 修改結束 ====================== -->
 
 <div id="drone-page" style="display:none;">
     <div class="header">
@@ -1320,17 +1309,17 @@
 
         <div class="slideshow-container">
             <div class="slide" data-type="video">
-                <video muted playsinline>
+                <video muted playsinline loop>
                     <source src="Riding_DEMVd.mp4" type="video/mp4">
                 </video>
             </div>
             <div class="slide" data-type="video">
-                <video muted playsinline>
+                <video muted playsinline loop>
                     <source src="glidemode.mp4" type="video/mp4">
                 </video>
             </div>
             <div class="slide" data-type="video">
-                <video muted playsinline>
+                <video muted playsinline loop>
                     <source src="diveDEM.mp4" type="video/mp4">
                 </video>
             </div>
@@ -1380,45 +1369,45 @@
     </div>
 
     <script>
-        let slideIndex = 0;
-        let slides, dots;
+        let droneSlideIndex = 0;
+        let droneSlides, droneDots;
 
-        function initSlides() {
-            slides = document.querySelectorAll("#drone-page .slide");
-            dots = document.querySelectorAll("#drone-page .dot");
-            slideIndex = 0;
-            showSlide(slideIndex);
+        function initDroneSlides() {
+            droneSlides = document.querySelectorAll("#drone-page .slide");
+            droneDots = document.querySelectorAll("#drone-page .dot");
+            droneSlideIndex = 0;
+            showDroneSlide(droneSlideIndex);
         }
 
-        function showSlide(n) {
-            if (!slides || slides.length === 0) return;
+        function showDroneSlide(n) {
+            if (!droneSlides || droneSlides.length === 0) return;
             
-            slides.forEach(s => s.style.display = "none");
-            dots.forEach(d => d.style.background = "#bbb");
+            droneSlides.forEach(s => s.style.display = "none");
+            droneDots.forEach(d => d.style.background = "#bbb");
             
-            slideIndex = n % slides.length;
+            droneSlideIndex = n % droneSlides.length;
             
-            slides[slideIndex].style.display = "block";
-            dots[slideIndex].style.background = "var(--btn-bg)";
+            droneSlides[droneSlideIndex].style.display = "block";
+            droneDots[droneSlideIndex].style.background = "var(--btn-bg)";
             
-            const current = slides[slideIndex];
+            const current = droneSlides[droneSlideIndex];
             const video = current.querySelector("video");
             
             if (current.dataset.type === "video" && video) {
                 video.currentTime = 0;
                 video.play();
                 video.onended = () => {
-                    showSlide(slideIndex + 1);
+                    showDroneSlide(droneSlideIndex + 1);
                 };
             } else {
                 setTimeout(() => {
-                    showSlide(slideIndex + 1);
+                    showDroneSlide(droneSlideIndex + 1);
                 }, 7000);
             }
         }
 
         window.startDroneSlide = () => {
-            setTimeout(initSlides, 300);
+            setTimeout(initDroneSlides, 300);
         };
     </script>
 </div>
