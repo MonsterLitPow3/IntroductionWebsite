@@ -13,6 +13,7 @@
             transition: background-color 0.4s ease, color 0.4s ease;
             scroll-behavior: smooth;
         }
+        
 
         :root {
             --bg-main: #f4f5f7;
@@ -399,6 +400,28 @@
             border-radius: 12px;
             outline: none;
         }
+        .external-window {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 24px;
+    background: var(--bg-card);
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+    backdrop-filter: blur(10px);
+}
+
+.external-iframe {
+    width: 100%;
+    height: 500px;
+    border-radius: 16px;
+    border: none;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 768px) {
+    .external-iframe { height: 400px; }
+}
     </style>
 </head>
 <body>
@@ -501,11 +524,24 @@
         <button class="top-btn" id="langBtn3">繁體中文</button>
         <button class="top-btn" id="themeBtn3">🌓</button>
     </div>
-    <div class="empty-page">
-        <h2 data-lang="en">Art Gallery</h2>
-        <h2 data-lang="zh">互動藝術展覽</h2>
-        <p data-lang="en">Coming soon</p>
-        <p data-lang="zh">即將推出</p>
+    
+    <div class="detail-page" style="margin-top:80px;">
+        <h2 data-lang="en">Art Gallery (Live Demo)</h2>
+        <h2 data-lang="zh">互動藝術展覽 (即時展示)</h2>
+        
+        <!-- <p data-lang="en">Your live running website embedded here.</p>
+        <p data-lang="zh">你的運營中網站直接嵌入展示。</p> -->
+        
+        <!-- 你的運營網站 -->
+        <div class="external-window">
+            <h3>🎨 Live Interactive Gallery</h3>
+            <iframe 
+                class="external-iframe" 
+                src="https://monsterlitpow3.github.io/EMIA2200-CreNature/CreNature.html"
+                allowfullscreen
+                sandbox="allow-scripts allow-same-origin allow-forms">
+            </iframe>
+        </div>
     </div>
 </div>
 
@@ -543,15 +579,15 @@
             <p data-lang="zh"><strong>製作 / 導演 / 剪輯：</strong> 陳兆熙</p>
         </div>
         <div class="youtube-container">
-            <video controls muted playsinline style="width:100%;border-radius:16px;">
-                <source src="https://drive.google.com/file/d/1tIwJST6k_qpLl5wH2x2NTNhY2XPOezTM/view?usp=sharing" type="video/mp4">
+            <video controls muted playsinline style="width:100%;height:100%;object-fit:cover;">
+                <source src="https://drive.google.com/uc?export=download&id=1tIwJST6k_qpLl5wH2x2NTNhY2XPOezTM" type="video/mp4">
             </video>
         </div>
         <h4 style="margin:10px 0 10px;" data-lang="en">Behind The Scenes</h4>
         <h4 style="margin:10px 0 10px;" data-lang="zh">幕後花絮</h4>
         <div class="youtube-container">
-            <video controls muted playsinline style="width:100%;border-radius:16px;">
-                <source src="https://drive.google.com/file/d/1lpe_Czqm3UuDCQJiL21yR-La1x3x1c3-/view?usp=sharing" type="video/mp4">
+            <video controls muted playsinline style="width:100%;height:100%;object-fit:cover;">
+                <source src="https://drive.google.com/uc?export=download&id=1lpe_Czqm3UuDCQJiL21yR-La1x3x1c3-" type="video/mp4">
             </video>
         </div>
 
@@ -569,15 +605,15 @@
             <p data-lang="zh"><strong>視覺來源:</strong> After Effects 製作</p>
         </div>
         <div class="youtube-container">
-            <video controls muted playsinline style="width:100%;border-radius:16px;">
-                <source src="https://drive.google.com/file/d/12WH6F02PD5gfWrTYoc_f9iGx4gng0qns/view?usp=sharing" type="video/mp4">
+            <video controls muted playsinline style="width:100%;height:100%;object-fit:cover;">
+                <source src="https://drive.google.com/uc?export=download&id=12WH6F02PD5gfWrTYoc_f9iGx4gng0qns" type="video/mp4">
             </video>
         </div>
         <h4 style="margin:10px 0 10px;" data-lang="en">Behind The Scenes</h4>
         <h4 style="margin:10px 0 10px;" data-lang="zh">幕後花絮</h4>
         <div class="youtube-container">
-            <video controls muted playsinline style="width:100%;border-radius:16px;">
-                <source src="https://drive.google.com/file/d/1y6vjV7j7s6jBuGpn1B4bkjQdh6mm5QdZ/view?usp=sharing" type="video/mp4">
+            <video controls muted playsinline style="width:100%;height:100%;object-fit:cover;">
+                <source src="https://drive.google.com/uc?export=download&id=1y6vjV7j7s6jBuGpn1B4bkjQdh6mm5QdZ" type="video/mp4">
             </video>
         </div>
 
@@ -595,15 +631,15 @@
             <p data-lang="zh"><strong>視覺素材:</strong> 網絡, AI-使用</p>
         </div>
         <div class="youtube-container">
-            <video controls muted playsinline style="width:100%;border-radius:16px;">
-                <source src="https://drive.google.com/file/d/1e8x_1b6LZyDZbWQsY3YDpRpmoa4sTSf9/view?usp=sharing" type="video/mp4">
+            <video controls muted playsinline style="width:100%;height:100%;object-fit:cover;">
+                <source src="https://drive.google.com/uc?export=download&id=1e8x_1b6LZyDZbWQsY3YDpRpmoa4sTSf9" type="video/mp4">
             </video>
         </div>
         <h4 style="margin:10px 0 10px;" data-lang="en">Behind The Scenes</h4>
         <h4 style="margin:10px 0 10px;" data-lang="zh">幕後花絮</h4>
         <div class="youtube-container">
-            <video controls muted playsinline style="width:100%;border-radius:16px;">
-                <source src="https://drive.google.com/file/d/1d_bYiUVQIo_4weUM-38bFJyCBAb1VdlC/view?usp=sharing" type="video/mp4">
+            <video controls muted playsinline style="width:100%;height:100%;object-fit:cover;">
+                <source src="https://drive.google.com/uc?export=download&id=1d_bYiUVQIo_4weUM-38bFJyCBAb1VdlC" type="video/mp4">
             </video>
         </div>
 
@@ -621,15 +657,15 @@
             <p data-lang="zh"><strong>視覺素材:</strong> 網絡 </p>
         </div>
         <div class="youtube-container">
-            <video controls muted playsinline style="width:100%;border-radius:16px;">
-                <source src="https://drive.google.com/file/d/1QXM8LXtb8czVx-yUbA8okSmJpv3igiZU/view?usp=sharing" type="video/mp4">
+            <video controls muted playsinline style="width:100%;height:100%;object-fit:cover;">
+                <source src="https://drive.google.com/uc?export=download&id=1QXM8LXtb8czVx-yUbA8okSmJpv3igiZU" type="video/mp4">
             </video>
         </div>
         <h4 style="margin:10px 0 10px;" data-lang="en">Behind The Scenes</h4>
         <h4 style="margin:10px 0 10px;" data-lang="zh">幕後花絮</h4>
         <div class="youtube-container">
-            <video controls muted playsinline style="width:100%;border-radius:16px;">
-                <source src="https://drive.google.com/file/d/12syUjoN0pssDOb875onYKR3UI-18AMMs/view?usp=sharing" type="video/mp4">
+            <video controls muted playsinline style="width:100%;height:100%;object-fit:cover;">
+                <source src="https://drive.google.com/uc?export=download&id=12syUjoN0pssDOb875onYKR3UI-18AMMs" type="video/mp4">
             </video>
         </div>
 
