@@ -380,6 +380,25 @@
         @media (max-width:768px) {
             .dual-window { grid-template-columns: 1fr; }
         }
+
+        /* Music Player */
+        .music-list {
+            margin: 40px 0;
+        }
+        .music-item {
+            margin: 16px 0;
+        }
+        .music-item h4 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: var(--text-main);
+        }
+        audio {
+            width: 100%;
+            height: 50px;
+            border-radius: 12px;
+            outline: none;
+        }
     </style>
 </head>
 <body>
@@ -510,11 +529,66 @@
         <button class="top-btn" id="langBtn5">繁體中文</button>
         <button class="top-btn" id="themeBtn5">🌓</button>
     </div>
-    <div class="empty-page">
+    <div class="detail-page">
         <h2 data-lang="en">Music Production</h2>
         <h2 data-lang="zh">原創音樂製作</h2>
-        <p data-lang="en">Coming soon</p>
-        <p data-lang="zh">即將推出</p>
+        <p data-lang="en">Original music compositions, background scores, and experimental tracks created using Logic Pro. Including ambient, cinematic, electronic, and melodic genres.</p>
+        <p data-lang="zh">使用 Logic Pro 創作之原創音樂、配樂、氛圍音與實驗曲風，包含氛圍、電影感、電子與旋律性作品。</p>
+
+        <div class="info-box">
+            <p data-lang="en"><strong>Release Date:</strong> 2024–2025</p>
+            <p data-lang="zh"><strong>發佈日期：</strong> 2024–2025</p>
+            <p data-lang="en"><strong>Software:</strong> Logic Pro X</p>
+            <p data-lang="zh"><strong>軟體：</strong> Logic Pro X</p>
+            <p data-lang="en"><strong>Producer:</strong> Jerry Claudius Chen</p>
+            <p data-lang="zh"><strong>製作人：</strong> 陳兆熙</p>
+        </div>
+
+        <div class="music-list">
+            <div class="music-item">
+                <h4 data-lang="en">Track 01 - Fantasized Murderer</h4>
+                <h4 data-lang="zh">音樂 01 - 幻想謀殺</h4>
+                <h4 data-lang="en">This is an original remix song of combining current market singers' vocals with a completed original instrumental, including bass, guitar, drum sets, keyboards, etc.</h4>
+                <h4 data-lang="en">Music Production: Jerry Claudius Chen</h4>
+                <h4 data-lang="en">Credits: Ariana Grande, Doja Cat, Kendrick Lamar, Key Glock</h4>
+                <h4 data-lang="zh">這是一首原創二創歌曲，通過融合現有市場已公開的歌曲人聲，配合原創製作的音樂伴奏和特效，包括原創的樂器，鼓組，bass，結他，合成器，鍵盤等。</h4>
+                <h4 data-lang="zh">音樂製作: 陳兆熙</h4>
+                <h4 data-lang="zh">Credits: Ariana Grande, Doja Cat, Kendrick Lamar, Key Glock</h4>
+                
+                <audio controls>
+                    <source src="FantasizedMurderer(MaxVol).mp3" type="audio/mpeg">
+                </audio>
+            </div>
+            <div class="music-item">
+                <h4 data-lang="en">Track 02 - Fantasized Murderer (Instrumental) </h4>
+                <h4 data-lang="zh">音樂 02 - 幻想謀殺（純伴奏）</h4>
+                <audio controls>
+                    <source src="FantasizedMurderer(MaxVol)_Instrumental.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+            <div class="music-item">
+                <h4 data-lang="en">Track 03 - Flee</h4>
+                <h4 data-lang="zh">音樂 03 - 逃跑</h4>
+                <h4 data-lang="en">This is a song with original vocals, lyrics, music composed, and production. With a central idea of expressing an eagerness to escape from reality and burdens.</h4>
+                <h4 data-lang="en">Composer: Jerry Claudius Chen</h4>
+                <h4 data-lang="en">Lyrics: Jerry Claudius Chen</h4>
+                <h4 data-lang="en">Music Production: Jerry Claudius Chen</h4>
+                <h4 data-lang="zh">這是一首原創歌曲，配合原創製作的人聲，歌詞，主旋律，音樂伴奏和特效，通過表達對於從現實世界的負擔中逃跑的急切渴求。</h4>
+                <h4 data-lang="zh">歌曲: 陳兆熙</h4>
+                <h4 data-lang="zh">歌詞: 陳兆熙</h4>
+                <h4 data-lang="zh">音樂製作: 陳兆熙</h4>
+                <audio controls>
+                    <source src="Flee.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+            <div class="music-item">
+                <h4 data-lang="en">Track 04 - Flee (Instrumental)</h4>
+                <h4 data-lang="zh">音樂 04 - 逃跑（純伴奏）</h4>
+                <audio controls>
+                    <source src="Flee_Instrumental.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -1367,7 +1441,6 @@
             <iframe src="https://1drv.ms/p/c/c7d3dcba83a12d37/IQSCmzFP1r-MTJGQE8KNEvMTAQvpd4SGRH2TY1CPETmZuDE" frameborder="0" allowfullscreen></iframe>
         </div>
     </div>
-</div>
 
     <script>
         let droneSlideIndex = 0;
