@@ -414,10 +414,14 @@
 
 .external-iframe {
     width: 100%;
-    height: 500px;
+    height: 1200px;  /* 超長！從 500px 改 1200px */
     border-radius: 16px;
     border: none;
     box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 768px) {
+    .external-iframe { height: 900px; }  /* 手機也長很多 */
 }
 
 @media (max-width: 768px) {
@@ -552,124 +556,76 @@
         <button class="top-btn" id="langBtn4">繁體中文</button>
         <button class="top-btn" id="themeBtn4">🌓</button>
     </div>
+    
     <div class="detail-page">
         <h2 data-lang="en">MV Production Portfolio</h2>
         <h2 data-lang="zh">音樂影像創作作品集</h2>
-        <p data-lang="en">
-            A collection of self-directed, filmed, edited and post-produced music videos. 
-            Covers narrative MV, lyric video, experimental visual art and behind-the-scenes production footage.
-            Workflow includes shooting, colour grading, motion graphics, VFX and sound design.
-        </p>
-        <p data-lang="zh">
-            收錄個人自導、自攝、剪輯與後製的原創/二創音樂影像作品。
-            包含劇情式 MV、歌詞動畫、實驗影像藝術以及完整幕後花絮記錄。
-            製作流程涵蓋實拍取景、調色、動態圖形、視覺特效與音效配樂。
-        </p>
+        <p data-lang="en">A collection of self-directed, filmed, edited and post-produced music videos.</p>
+        <p data-lang="zh">收錄個人自導、自攝、剪輯與後製的原創/二創音樂影像作品。</p>
 
-        <!-- MV 1 -->
+        <!-- MV 01 -->
         <div class="info-box">
             <h3 data-lang="en">MV 01 - The Subtle Montage</h3>
             <h3 data-lang="zh">MV 01 - 蒙太奇之妙</h3>
-            <p data-lang="en"><strong>Release Date:</strong> 23/03/2026</p>
-            <p data-lang="zh"><strong>發佈日期：</strong> 23/03/2026</p>
-            <p data-lang="en"><strong>Duration:</strong> 02:12</p>
-            <p data-lang="zh"><strong>影片時長：</strong> 02:12</p>
-            <p data-lang="en"><strong>Producer / Director / Editor:</strong> Jerry Claudius Chen</p>
-            <p data-lang="en"><strong>Visual Source:</strong> Internet</p>
-            <p data-lang="zh"><strong>視覺來源:</strong> 網絡</p>
-            <p data-lang="zh"><strong>製作 / 導演 / 剪輯：</strong> 陳兆熙</p>
+            <p data-lang="en"><strong>Release Date:</strong> 23/03/2026 | <strong>Duration:</strong> 02:12</p>
+            <p data-lang="zh"><strong>發佈日期：</strong> 23/03/2026 | <strong>時長：</strong> 02:12</p>
         </div>
         <div class="youtube-container">
-            <video controls muted playsinline style="width:100%;height:100%;object-fit:cover;">
-                <source src="https://drive.google.com/uc?export=download&id=1tIwJST6k_qpLl5wH2x2NTNhY2XPOezTM" type="video/mp4">
-            </video>
+            <iframe src="https://drive.google.com/file/d/1tIwJST6k_qpLl5wH2x2NTNhY2XPOezTM/preview" frameborder="0" allowfullscreen></iframe>
         </div>
-        <h4 style="margin:10px 0 10px;" data-lang="en">Behind The Scenes</h4>
-        <h4 style="margin:10px 0 10px;" data-lang="zh">幕後花絮</h4>
+        <h4 style="margin:5px 0 10px;" data-lang="en">Behind The Scenes</h4>
+        <h4 style="margin:5px 0 10px;" data-lang="zh">幕後花絮</h4>
         <div class="youtube-container">
-            <video controls muted playsinline style="width:100%;height:100%;object-fit:cover;">
-                <source src="https://drive.google.com/uc?export=download&id=1lpe_Czqm3UuDCQJiL21yR-La1x3x1c3-" type="video/mp4">
-            </video>
+            <iframe src="https://drive.google.com/file/d/1lpe_Czqm3UuDCQJiL21yR-La1x3x1c3-/preview" frameborder="0" allowfullscreen></iframe>
         </div>
 
-        <!-- MV 2 -->
+        <!-- MV 02 -->
         <div class="info-box" style="margin-top:60px;">
             <h3 data-lang="en">MV 02 - Flee</h3>
             <h3 data-lang="zh">MV 02 - 逃跑</h3>
-            <p data-lang="en"><strong>Release Date:</strong> 22/04/2026</p>
-            <p data-lang="zh"><strong>發佈日期：</strong> 22/04/2026</p>
-            <p data-lang="en"><strong>Duration:</strong> 03:03</p>
-            <p data-lang="zh"><strong>影片時長：</strong> 03:03</p>
-            <p data-lang="en"><strong>Producer / Director / Editor:</strong> Jerry Claudius Chen</p>
-            <p data-lang="zh"><strong>製作 / 導演 / 剪輯：</strong> 陳兆熙</p>
-            <p data-lang="en"><strong>Visual Source:</strong> After Effects Production</p>
-            <p data-lang="zh"><strong>視覺來源:</strong> After Effects 製作</p>
+            <p data-lang="en"><strong>Release Date:</strong> 22/04/2026 | <strong>Duration:</strong> 03:03</p>
+            <p data-lang="zh"><strong>發佈日期：</strong> 22/04/2026 | <strong>時長：</strong> 03:03</p>
         </div>
         <div class="youtube-container">
-            <video controls muted playsinline style="width:100%;height:100%;object-fit:cover;">
-                <source src="https://drive.google.com/uc?export=download&id=12WH6F02PD5gfWrTYoc_f9iGx4gng0qns" type="video/mp4">
-            </video>
+            <iframe src="https://drive.google.com/file/d/12WH6F02PD5gfWrTYoc_f9iGx4gng0qns/preview" frameborder="0" allowfullscreen></iframe>
         </div>
-        <h4 style="margin:10px 0 10px;" data-lang="en">Behind The Scenes</h4>
-        <h4 style="margin:10px 0 10px;" data-lang="zh">幕後花絮</h4>
+        <h4 style="margin:5px 0 10px;" data-lang="en">Behind The Scenes</h4>
+        <h4 style="margin:5px 0 10px;" data-lang="zh">幕後花絮</h4>
         <div class="youtube-container">
-            <video controls muted playsinline style="width:100%;height:100%;object-fit:cover;">
-                <source src="https://drive.google.com/uc?export=download&id=1y6vjV7j7s6jBuGpn1B4bkjQdh6mm5QdZ" type="video/mp4">
-            </video>
+            <iframe src="https://drive.google.com/file/d/1y6vjV7j7s6jBuGpn1B4bkjQdh6mm5QdZ/preview" frameborder="0" allowfullscreen></iframe>
         </div>
 
-        <!-- MV 3 -->
+        <!-- MV 03 -->
         <div class="info-box" style="margin-top:60px;">
             <h3 data-lang="en">MV 03 - Average_Speed_Viewer</h3>
             <h3 data-lang="zh">MV 03 - 一般Ishowspeed觀衆Be like</h3>
-            <p data-lang="en"><strong>Release Date:</strong> 03/03/2026</p>
-            <p data-lang="zh"><strong>發佈日期：</strong> 03/03/2026</p>
-            <p data-lang="en"><strong>Duration:</strong> 02:00</p>
-            <p data-lang="zh"><strong>影片時長：</strong> 02:00</p>
-            <p data-lang="en"><strong>Producer / Director / Editor:</strong> Jerry Claudius Chen</p>
-            <p data-lang="en"><strong>Visual Sources:</strong> Internet, AI-involved</p>
-            <p data-lang="zh"><strong>製作 / 導演 / 剪輯：</strong> 陳兆熙</p>
-            <p data-lang="zh"><strong>視覺素材:</strong> 網絡, AI-使用</p>
+            <p data-lang="en"><strong>Release Date:</strong> 03/03/2026 | <strong>Duration:</strong> 02:00</p>
+            <p data-lang="zh"><strong>發佈日期：</strong> 03/03/2026 | <strong>時長：</strong> 02:00</p>
         </div>
         <div class="youtube-container">
-            <video controls muted playsinline style="width:100%;height:100%;object-fit:cover;">
-                <source src="https://drive.google.com/uc?export=download&id=1e8x_1b6LZyDZbWQsY3YDpRpmoa4sTSf9" type="video/mp4">
-            </video>
+            <iframe src="https://drive.google.com/file/d/1e8x_1b6LZyDZbWQsY3YDpRpmoa4sTSf9/preview" frameborder="0" allowfullscreen></iframe>
         </div>
-        <h4 style="margin:10px 0 10px;" data-lang="en">Behind The Scenes</h4>
-        <h4 style="margin:10px 0 10px;" data-lang="zh">幕後花絮</h4>
+        <h4 style="margin:5px 0 10px;" data-lang="en">Behind The Scenes</h4>
+        <h4 style="margin:5px 0 10px;" data-lang="zh">幕後花絮</h4>
         <div class="youtube-container">
-            <video controls muted playsinline style="width:100%;height:100%;object-fit:cover;">
-                <source src="https://drive.google.com/uc?export=download&id=1d_bYiUVQIo_4weUM-38bFJyCBAb1VdlC" type="video/mp4">
-            </video>
+            <iframe src="https://drive.google.com/file/d/1d_bYiUVQIo_4weUM-38bFJyCBAb1VdlC/preview" frameborder="0" allowfullscreen></iframe>
         </div>
 
-        <!-- MV 4 -->
+        <!-- MV 04 -->
         <div class="info-box" style="margin-top:60px;">
             <h3 data-lang="en">MV 04 - The_Illusional_Monkey</h3>
             <h3 data-lang="zh">MV 04 - 魔幻之猴</h3>
-            <p data-lang="en"><strong>Release Date:</strong> 14/02/2026</p>
-            <p data-lang="zh"><strong>發佈日期：</strong> 14/02/2026</p>
-            <p data-lang="en"><strong>Duration:</strong> 01:44</p>
-            <p data-lang="zh"><strong>影片時長：</strong> 01:44</p>
-            <p data-lang="en"><strong>Producer / Director / Editor:</strong> Jerry Claudius Chen</p>
-            <p data-lang="zh"><strong>製作 / 導演 / 剪輯：</strong> 陳兆熙</p>
-            <p data-lang="en"><strong>Visual Sources:</strong> Internet</p>
-            <p data-lang="zh"><strong>視覺素材:</strong> 網絡 </p>
+            <p data-lang="en"><strong>Release Date:</strong> 14/02/2026 | <strong>Duration:</strong> 01:44</p>
+            <p data-lang="zh"><strong>發佈日期：</strong> 14/02/2026 | <strong>時長：</strong> 01:44</p>
         </div>
         <div class="youtube-container">
-            <video controls muted playsinline style="width:100%;height:100%;object-fit:cover;">
-                <source src="https://drive.google.com/uc?export=download&id=1QXM8LXtb8czVx-yUbA8okSmJpv3igiZU" type="video/mp4">
-            </video>
+            <iframe src="https://drive.google.com/file/d/1QXM8LXtb8czVx-yUbA8okSmJpv3igiZU/preview" frameborder="0" allowfullscreen></iframe>
         </div>
-        <h4 style="margin:10px 0 10px;" data-lang="en">Behind The Scenes</h4>
-        <h4 style="margin:10px 0 10px;" data-lang="zh">幕後花絮</h4>
+        <h4 style="margin:5px 0 10px;" data-lang="en">Behind The Scenes</h4>
+        <h4 style="margin:5px 0 10px;" data-lang="zh">幕後花絮</h4>
         <div class="youtube-container">
-            <video controls muted playsinline style="width:100%;height:100%;object-fit:cover;">
-                <source src="https://drive.google.com/uc?export=download&id=12syUjoN0pssDOb875onYKR3UI-18AMMs" type="video/mp4">
-            </video>
+            <iframe src="https://drive.google.com/file/d/12syUjoN0pssDOb875onYKR3UI-18AMMs/preview" frameborder="0" allowfullscreen></iframe>
         </div>
-
     </div>
 </div>
 
