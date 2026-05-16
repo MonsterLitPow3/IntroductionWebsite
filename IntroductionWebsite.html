@@ -324,6 +324,8 @@
             height: auto;
             display: block;
             object-fit: contain;
+            max-height: 500px;
+            margin: 0 auto;
         }
 
         .dot {
@@ -334,6 +336,7 @@
             background: #bbb;
             display: inline-block;
             transition: background 0.3s ease;
+            cursor: pointer;
         }
 
         .dual-window {
@@ -534,10 +537,6 @@
         <h2 data-lang="en">Art Gallery (Live Demo)</h2>
         <h2 data-lang="zh">互動藝術展覽 (即時展示)</h2>
         
-        <!-- <p data-lang="en">Your live running website embedded here.</p>
-        <p data-lang="zh">你的運營中網站直接嵌入展示。</p> -->
-        
-        <!-- 你的運營網站 -->
         <div class="external-window">
             <h3>🎨 Live Interactive Gallery</h3>
             <iframe 
@@ -563,7 +562,6 @@
         <p data-lang="en">A collection of self-directed, filmed, edited and post-produced music videos.</p>
         <p data-lang="zh">收錄個人自導、自攝、剪輯與後製的原創/二創音樂影像作品。</p>
 
-        <!-- MV 01 -->
         <div class="info-box">
             <h3 data-lang="en">MV 01 - The Subtle Montage</h3>
             <h3 data-lang="zh">MV 01 - 蒙太奇之妙</h3>
@@ -585,7 +583,6 @@
             <iframe src="https://drive.google.com/file/d/1lpe_Czqm3UuDCQJiL21yR-La1x3x1c3-/preview" frameborder="0" allowfullscreen></iframe>
         </div>
 
-        <!-- MV 02 -->
        <div class="info-box" style="margin-top:60px;">
             <h3 data-lang="en">MV 02 - Flee</h3>
             <h3 data-lang="zh">MV 02 - 逃跑</h3>
@@ -607,7 +604,6 @@
             <iframe src="https://drive.google.com/file/d/1y6vjV7j7s6jBuGpn1B4bkjQdh6mm5QdZ/preview" frameborder="0" allowfullscreen></iframe>
         </div>
 
-        <!-- MV 03 -->
          <div class="info-box" style="margin-top:60px;">
             <h3 data-lang="en">MV 03 - Average_Speed_Viewer</h3>
             <h3 data-lang="zh">MV 03 - 一般Ishowspeed觀衆Be like</h3>
@@ -629,7 +625,6 @@
             <iframe src="https://drive.google.com/file/d/1d_bYiUVQIo_4weUM-38bFJyCBAb1VdlC/preview" frameborder="0" allowfullscreen></iframe>
         </div>
 
-        <!-- MV 04 -->
       <div class="info-box" style="margin-top:60px;">
             <h3 data-lang="en">MV 04 - The_Illusional_Monkey</h3>
             <h3 data-lang="zh">MV 04 - 魔幻之猴</h3>
@@ -734,23 +729,23 @@
         <h2 style="text-align:center;" data-lang="zh">電子寵物：控制與寵物模式</h2>
         <div style="margin:30px 0;"></div>
 
-        <div class="slideshow-container">
+        <div class="slideshow-container" id="digipet-slideshow">
             <div class="slide" data-type="video">
-                <video muted playsinline loop>
+                <video muted playsinline>
                     <source src="4demovideo.mp4" type="video/mp4">
                 </video>
             </div>
             <div class="slide" data-type="image">
-                <img src="5photo1.jpg">
+                <img src="5photo1.jpg" alt="Digipet Photo 1">
             </div>
             <div class="slide" data-type="image">
-                <img src="5photo2.jpg">
+                <img src="5photo2.jpg" alt="Digipet Photo 2">
             </div>
 
-            <div style="text-align:center; padding:10px; background:rgba(0,0,0,0.2);">
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
+            <div style="text-align:center; padding:10px; background:rgba(0,0,0,0.2);" class="dots-container">
+                <span class="dot" data-index="0"></span>
+                <span class="dot" data-index="1"></span>
+                <span class="dot" data-index="2"></span>
             </div>
         </div>
 
@@ -1447,56 +1442,7 @@
 &lt;/html&gt;</div>
             </div>
         </div>
-
-        <!-- <h3 style="margin:30px 0 10px;" data-lang="en">Project Presentation</h3>
-        <h3 style="margin:30px 0 10px;" data-lang="zh">專案簡報</h3> -->
-        <!-- <div class="youtube-container">
-            <iframe src="https://1drv.ms/p/c/c7d3dcba83a12d37/IQSCmzFP1r-MTJGQE8KNEvMTAQvpd4SGRH2TY1CPETmZuDE" frameborder="0" allowfullscreen></iframe>
-        </div> -->
     </div>
-
-    <script>
-        let digiSlideIndex = 0;
-        let digiSlides, digiDots;
-
-        function initDigiSlides() {
-            digiSlides = document.querySelectorAll("#digipet-page .slide");
-            digiDots = document.querySelectorAll("#digipet-page .dot");
-            digiSlideIndex = 0;
-            showDigiSlide(digiSlideIndex);
-        }
-
-        function showDigiSlide(n) {
-            if (!digiSlides || digiSlides.length === 0) return;
-            
-            digiSlides.forEach(s => s.style.display = "none");
-            digiDots.forEach(d => d.style.background = "#bbb");
-            
-            digiSlideIndex = n % digiSlides.length;
-            
-            digiSlides[digiSlideIndex].style.display = "block";
-            digiDots[digiSlideIndex].style.background = "var(--btn-bg)";
-            
-            const current = digiSlides[digiSlideIndex];
-            const video = current.querySelector("video");
-            
-            if (current.dataset.type === "video" && video) {
-                video.currentTime = 0;
-                video.play();
-                video.onended = () => {
-                    showDigiSlide(digiSlideIndex + 1);
-                };
-            } else {
-                setTimeout(() => {
-                    showDigiSlide(digiSlideIndex + 1);
-                }, 7000);
-            }
-        }
-
-        window.startDigiSlide = () => {
-            setTimeout(initDigiSlides, 300);
-        };
-    </script>
 </div>
 
 <div id="drone-page" style="display:none;">
@@ -1511,35 +1457,35 @@
         <h2 style="text-align:center;" data-lang="zh">科技研究與虛擬無人機專案</h2>
         <div style="margin:30px 0;"></div>
 
-        <div class="slideshow-container">
+        <div class="slideshow-container" id="drone-slideshow">
             <div class="slide" data-type="video">
-                <video muted playsinline loop>
+                <video muted playsinline>
                     <source src="Riding_DEMVd.mp4" type="video/mp4">
                 </video>
             </div>
             <div class="slide" data-type="video">
-                <video muted playsinline loop>
+                <video muted playsinline>
                     <source src="glidemode.mp4" type="video/mp4">
                 </video>
             </div>
             <div class="slide" data-type="video">
-                <video muted playsinline loop>
+                <video muted playsinline>
                     <source src="diveDEM.mp4" type="video/mp4">
                 </video>
             </div>
             <div class="slide" data-type="image">
-                <img src="Drone_BluePrint.png">
+                <img src="Drone_BluePrint.png" alt="Drone Blueprint">
             </div>
             <div class="slide" data-type="image">
-                <img src="Drone.png">
+                <img src="Drone.png" alt="Drone Model">
             </div>
 
-            <div style="text-align:center; padding:10px; background:rgba(0,0,0,0.2);">
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
+            <div style="text-align:center; padding:10px; background:rgba(0,0,0,0.2);" class="dots-container">
+                <span class="dot" data-index="0"></span>
+                <span class="dot" data-index="1"></span>
+                <span class="dot" data-index="2"></span>
+                <span class="dot" data-index="3"></span>
+                <span class="dot" data-index="4"></span>
             </div>
         </div>
 
@@ -1571,52 +1517,10 @@
             <iframe src="https://1drv.ms/p/c/c7d3dcba83a12d37/IQSCmzFP1r-MTJGQE8KNEvMTAQvpd4SGRH2TY1CPETmZuDE" frameborder="0" allowfullscreen></iframe>
         </div>
     </div>
-
-    <script>
-        let droneSlideIndex = 0;
-        let droneSlides, droneDots;
-
-        function initDroneSlides() {
-            droneSlides = document.querySelectorAll("#drone-page .slide");
-            droneDots = document.querySelectorAll("#drone-page .dot");
-            droneSlideIndex = 0;
-            showDroneSlide(droneSlideIndex);
-        }
-
-        function showDroneSlide(n) {
-            if (!droneSlides || droneSlides.length === 0) return;
-            
-            droneSlides.forEach(s => s.style.display = "none");
-            droneDots.forEach(d => d.style.background = "#bbb");
-            
-            droneSlideIndex = n % droneSlides.length;
-            
-            droneSlides[droneSlideIndex].style.display = "block";
-            droneDots[droneSlideIndex].style.background = "var(--btn-bg)";
-            
-            const current = droneSlides[droneSlideIndex];
-            const video = current.querySelector("video");
-            
-            if (current.dataset.type === "video" && video) {
-                video.currentTime = 0;
-                video.play();
-                video.onended = () => {
-                    showDroneSlide(droneSlideIndex + 1);
-                };
-            } else {
-                setTimeout(() => {
-                    showDroneSlide(droneSlideIndex + 1);
-                }, 7000);
-            }
-        }
-
-        window.startDroneSlide = () => {
-            setTimeout(initDroneSlides, 300);
-        };
-    </script>
 </div>
 
 <script>
+    // Create floating background circles
     function createCircles() {
         const container = document.getElementById('bgCircles');
         for(let i=0;i<18;i++){
@@ -1632,22 +1536,141 @@
     }
     createCircles();
 
+    // Generic slideshow manager
+    class SlideshowManager {
+        constructor(containerId) {
+            this.container = document.getElementById(containerId);
+            if (!this.container) return;
+            this.slides = Array.from(this.container.querySelectorAll('.slide'));
+            this.dots = Array.from(this.container.querySelectorAll('.dot'));
+            this.currentIndex = 0;
+            this.timer = null;
+            this.init();
+        }
+
+        init() {
+            if (this.slides.length === 0) return;
+            // Hide all slides initially
+            this.slides.forEach(slide => slide.style.display = 'none');
+            // Add click handlers to dots
+            this.dots.forEach((dot, idx) => {
+                dot.addEventListener('click', () => {
+                    this.stopAutoPlay();
+                    this.showSlide(idx);
+                    this.startAutoPlay();
+                });
+            });
+            // Start slideshow
+            this.showSlide(0);
+            this.startAutoPlay();
+        }
+
+        showSlide(index) {
+            if (!this.slides.length) return;
+            // Pause all videos before switching
+            this.slides.forEach(slide => {
+                const video = slide.querySelector('video');
+                if (video) {
+                    video.pause();
+                    video.currentTime = 0;
+                    video.removeEventListener('ended', this.videoEndHandler);
+                }
+            });
+
+            this.currentIndex = (index + this.slides.length) % this.slides.length;
+            
+            // Hide all slides
+            this.slides.forEach(slide => slide.style.display = 'none');
+            // Show current slide
+            const currentSlide = this.slides[this.currentIndex];
+            currentSlide.style.display = 'block';
+            
+            // Update dots
+            this.dots.forEach((dot, i) => {
+                dot.style.background = i === this.currentIndex ? 'var(--btn-bg)' : '#bbb';
+            });
+            
+            // Handle video autoplay
+            const currentVideo = currentSlide.querySelector('video');
+            if (currentVideo && currentSlide.dataset.type === 'video') {
+                currentVideo.muted = true;
+                currentVideo.play().catch(e => console.log('Video play error:', e));
+                // Bind ended event to move to next slide
+                this.videoEndHandler = () => {
+                    this.nextSlide();
+                };
+                currentVideo.addEventListener('ended', this.videoEndHandler);
+            } else {
+                // For images, automatically advance after 5 seconds
+                if (this.timer) clearTimeout(this.timer);
+                this.timer = setTimeout(() => {
+                    this.nextSlide();
+                }, 5000);
+            }
+        }
+
+        nextSlide() {
+            this.showSlide(this.currentIndex + 1);
+        }
+
+        startAutoPlay() {
+            // Auto-play is handled by the showSlide logic
+        }
+
+        stopAutoPlay() {
+            if (this.timer) {
+                clearTimeout(this.timer);
+                this.timer = null;
+            }
+            // Remove video ended listeners
+            this.slides.forEach(slide => {
+                const video = slide.querySelector('video');
+                if (video && this.videoEndHandler) {
+                    video.removeEventListener('ended', this.videoEndHandler);
+                }
+            });
+        }
+    }
+
+    let digipetSlideshow = null;
+    let droneSlideshow = null;
+
     function goPage(page) {
         document.getElementById('main-page').style.display = 'none';
         document.querySelectorAll('[id$="-page"]').forEach(p => p.style.display = 'none');
-        document.getElementById(page + '-page').style.display = 'block';
+        const targetPage = document.getElementById(page + '-page');
+        targetPage.style.display = 'block';
         window.scrollTo(0, 0);
-        if (page === 'drone' && window.startDroneSlide) {
-            window.startDroneSlide();
+        
+        // Initialize slideshow when page becomes visible
+        if (page === 'digipet') {
+            setTimeout(() => {
+                if (digipetSlideshow) {
+                    digipetSlideshow.stopAutoPlay();
+                }
+                digipetSlideshow = new SlideshowManager('digipet-slideshow');
+            }, 100);
+        } else if (page === 'drone') {
+            setTimeout(() => {
+                if (droneSlideshow) {
+                    droneSlideshow.stopAutoPlay();
+                }
+                droneSlideshow = new SlideshowManager('drone-slideshow');
+            }, 100);
         }
-        if (page === 'digipet' && window.startDigiSlide) {
-            window.startDigiSlide();
-        }
+        
         syncLangAll();
         syncThemeAll();
     }
 
     function backToMain() {
+        // Stop slideshows when leaving
+        if (digipetSlideshow) {
+            digipetSlideshow.stopAutoPlay();
+        }
+        if (droneSlideshow) {
+            droneSlideshow.stopAutoPlay();
+        }
         document.querySelectorAll('[id$="-page"]').forEach(p => p.style.display = 'none');
         document.getElementById('main-page').style.display = 'block';
         window.scrollTo(0, 0);
