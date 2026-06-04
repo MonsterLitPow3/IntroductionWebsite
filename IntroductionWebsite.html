@@ -430,6 +430,68 @@
 @media (max-width: 768px) {
     .external-iframe { height: 400px; }
 }
+
+/* ========== PHONE MOCKUP ========== */
+.phone-mockup {
+    display: flex;
+    justify-content: center;
+    margin: 20px auto 50px;
+}
+.phone-frame {
+    width: 280px;
+    height: 570px;
+    background: #1a1a1a;
+    border-radius: 40px;
+    padding: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    position: relative;
+    border: 2px solid #333;
+}
+.phone-frame .slideshow-container {
+    width: 100%;
+    height: 100%;
+    border-radius: 30px;
+    overflow: hidden;
+    background: #000;
+    position: relative;
+}
+.phone-frame .slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.phone-dots {
+    position: absolute;
+    bottom: 12px;
+    width: 100%;
+    text-align: center;
+}
+
+/* ========== SLIDESHOW MANUAL CONTROL ========== */
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    background: rgba(0,0,0,0.4);
+    border-radius: 50%;
+    user-select: none;
+    z-index: 10;
+    transition: 0.3s;
+}
+.prev { left: 10px; }
+.next { right: 10px; }
+.prev:hover, .next:hover {
+    background: rgba(0,0,0,0.7);
+}
     </style>
 </head>
 <body>
@@ -499,9 +561,152 @@
                 <h3 data-lang="zh">動畫影片 [借鋻還是抄襲？]</h3>
                 <span class="tools">Canva + Animator</span>
             </div>
+            <div class="card" onclick="goPage('taskclocked')">
+                <h3 data-lang="en">TaskClocked App</h3>
+                <h3 data-lang="zh">任務時鐘手機應用</h3>
+                <span class="tools">Figma + UI/UX + Proposal</span>
+            </div>
         </div>
     </section>
 </div>
+
+<!-- ===================== TASKCLOCKED PAGE (FULL VERSION) ===================== -->
+<div id="taskclocked-page" style="display:none;">
+    <div class="header">
+        <button class="top-btn" onclick="backToMain()">← Back</button>
+        <button class="top-btn" id="langBtn8">繁體中文</button>
+        <button class="top-btn" id="themeBtn8">🌓</button>
+    </div>
+
+    <div class="detail-page" style="margin-top:80px;">
+        <h2 style="text-align:center;" data-lang="en">TaskClocked Mobile App</h2>
+        <h2 style="text-align:center;" data-lang="zh">任務時鐘手機應用</h2>
+        <div style="margin:30px 0;"></div>
+
+        <!-- PHONE-SHAPED SLIDESHOW -->
+        <div class="phone-mockup">
+            <div class="phone-frame">
+                <div class="slideshow-container" id="taskclocked-slideshow">
+                    <div class="slide" data-type="image">
+                        <img src="Login.png" alt="TaskClocked UI 1">
+                    </div>
+                    <div class="slide" data-type="image">
+                        <img src="clockIn.png" alt="TaskClocked UI 2">
+                    </div>
+                    <div class="slide" data-type="image">
+                        <img src="Dashboard.png" alt="TaskClocked UI 3">
+                    </div>
+                    <div class="slide" data-type="image">
+                        <img src="SubTask.png" alt="TaskClocked UI 4">
+                    </div>
+                    <div class="slide" data-type="image">
+                        <img src="SubTaskDetail.png" alt="TaskClocked UI 4">
+                    </div>
+                    <div class="slide" data-type="image">
+                        <img src="AddTask.png" alt="TaskClocked UI 4">
+                    </div>
+                    <div class="slide" data-type="image">
+                        <img src="FurtherAddTask.png" alt="TaskClocked UI 4">
+                    </div>
+                    <div class="slide" data-type="image">
+                        <img src="MemberPage.png" alt="TaskClocked UI 4">
+                    </div>
+                    <div class="slide" data-type="image">
+                        <img src="Settings.png" alt="TaskClocked UI 4">
+                    </div>
+
+                    <a class="prev" onclick="manualSlide('taskclocked-slideshow', -1)">&#10094;</a>
+                    <a class="next" onclick="manualSlide('taskclocked-slideshow', 1)">&#10095;</a>
+                    <div class="phone-dots">
+                        <span class="dot" data-index="0"></span>
+                        <span class="dot" data-index="1"></span>
+                        <span class="dot" data-index="2"></span>
+                        <span class="dot" data-index="3"></span>
+                        <span class="dot" data-index="4"></span>
+                        <span class="dot" data-index="5"></span>
+                        <span class="dot" data-index="6"></span>
+                        <span class="dot" data-index="7"></span>
+                        <span class="dot" data-index="8"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONCEPT DIAGRAM SLIDESHOW -->
+        <h3 style="text-align:center; margin:40px 0 20px;" data-lang="en">Concept & System Diagram</h3>
+        <h3 style="text-align:center; margin:40px 0 20px;" data-lang="zh">概念設計與系統架構圖</h3>
+
+        <div class="slideshow-container" id="concept-slideshow" style="max-width:700px; border-radius:20px;">
+            <div class="slide" data-type="image">
+                <img src="Authentication Sequence Diagram.png" style="width:100%;">
+            </div>
+            <div class="slide" data-type="image">
+                <img src="COMP4521_ArchitectureDiagram.png" style="width:100%;">
+            </div>
+            <div class="slide" data-type="image">
+                <img src="Data Flow Diagram.png" style="width:100%;">
+            </div>
+            <div class="slide" data-type="image">
+                <img src="System Integration Schema.png" style="width:100%;">
+            </div>
+            <div class="slide" data-type="image">
+                <img src="Task Management Workflow.png" style="width:100%;">
+            </div>
+            <div class="slide" data-type="image">
+                <img src="UI Component Hierarchy.png" style="width:100%;">
+            </div>
+            <div class="slide" data-type="image">
+                <img src="User Interface Flow.png" style="width:100%;">
+            </div>
+
+            <a class="prev" onclick="manualSlide('concept-slideshow', -1)">&#10094;</a>
+            <a class="next" onclick="manualSlide('concept-slideshow', 1)">&#10095;</a>
+            <div style="text-align:center; padding:10px;">
+                <span class="dot" data-index="0"></span>
+                <span class="dot" data-index="1"></span>
+                <span class="dot" data-index="2"></span>
+                <span class="dot" data-index="3"></span>
+                <span class="dot" data-index="4"></span>
+                <span class="dot" data-index="5"></span>
+                <span class="dot" data-index="6"></span>
+            </div>
+        </div>
+
+        <!-- PDF BUTTONS (SAME ROW) -->
+        <!-- <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:50px 0 30px; max-width:600px; margin-left:auto; margin-right:auto;">
+            <button class="work-btn" onclick="showPdf('figma')" style="text-align:center; background:#ff5bac; border:none;">
+                🎨 Figma Design Document
+            </button>
+            <button class="work-btn" onclick="showPdf('proposal')" style="text-align:center; border:none;">
+                📄 Final Proposal & Report
+            </button>
+        </div> -->
+
+        <!-- PDF VIEWER (REPLACEABLE) -->
+        <!-- <div id="pdf-container" style="width:100%; height:700px; border-radius:20px; overflow:hidden; box-shadow:var(--shadow); display:none;">
+            <iframe id="pdf-frame" src="" width="100%" height="100%" style="border:none;" allowfullscreen></iframe>
+        </div> -->
+
+        <div class="info-box" style="margin-top:40px;">
+            <p data-lang="en"><strong>Project Type:</strong> Mobile Application UI/UX</p>
+            <p data-lang="zh"><strong>專案類型：</strong>手機應用程式介面設計</p>
+            <p data-lang="en"><strong>Tool:</strong> Figma + Mobile Prototype</p>
+            <p data-lang="zh"><strong>設計工具：</strong>Figma 介面設計</p>
+            <p data-lang="en"><strong>Designer:</strong> Jerry Claudius Chen</p>
+            <p data-lang="zh"><strong>設計師：</strong>陳兆熙</p>
+        </div>
+
+        <iframe 
+          style="border: 1px solid #eee; width: 100%; height: 450px; margin-top: 2rem;" 
+          src="https://embed.figma.com/design/xylFAxGOsmDwTKw1lCeqXs/COMP4521_1_0?node-id=0-1&embed-host=share" 
+          allowfullscreen>
+        </iframe>
+
+
+        
+    </div>
+</div>
+<!-- ===================== END TASKCLOCKED PAGE ===================== -->
 
 <div id="plagiarism-page" style="display:none;">
     <div class="header">
@@ -1286,7 +1491,7 @@
             const service = await server.getPrimaryService('0000ffe0-0000-1000-8000-00805f9b34fb');
             characteristic = await service.getCharacteristic('0000ffe1-0000-1000-8000-00805f9b34fb');
             characteristic.startNotifications();
-            characteristic.addEventListener('characteristicvaluechanged', (e) =&gt; {
+            characteristic.addEventListener('characteristicvaluechanged', (e) => {
                 let val = new TextDecoder().decode(e.target.value);
             });
             document.getElementById('status').innerText = 'Connected';
@@ -1319,7 +1524,7 @@
     
     function sendCmd(cmd) {
         if(!characteristic) return;
-        characteristic.writeValue(new TextEncoder().encode(cmd)).catch(err =&gt; {});
+        characteristic.writeValue(new TextEncoder().encode(cmd)).catch(err => {});
         
         if (isSpotting && ['F','B','L','R'].includes(cmd)) {
             updatePosition(cmd);
@@ -1418,29 +1623,29 @@
     });
     
     document.querySelectorAll('.control-btn').forEach(btn =&gt; {
-        btn.addEventListener('contextmenu', (e) =&gt; e.preventDefault());
-        btn.addEventListener('dragstart', (e) =&gt; e.preventDefault());
-        btn.addEventListener('selectstart', (e) =&gt; e.preventDefault());
-        btn.addEventListener('pointerdown', (e) =&gt; {
+        btn.addEventListener('contextmenu', (e) => e.preventDefault());
+        btn.addEventListener('dragstart', (e) => e.preventDefault());
+        btn.addEventListener('selectstart', (e) => e.preventDefault());
+        btn.addEventListener('pointerdown', (e) => {
             e.preventDefault();
             btn.classList.add('pressed');
             sendCmd(btn.dataset.cmd);
         });
-        btn.addEventListener('pointerup', (e) =&gt; {
+        btn.addEventListener('pointerup', (e) => {
             e.preventDefault();
             btn.classList.remove('pressed');
             sendCmd('S');
         });
-        btn.addEventListener('pointerleave', (e) =&gt; {
+        btn.addEventListener('pointerleave', (e) => {
             btn.classList.remove('pressed');
             sendCmd('S');
         });
-        btn.addEventListener('touchstart', (e) =&gt; {
+        btn.addEventListener('touchstart', (e) => {
             e.preventDefault();
             btn.classList.add('pressed');
             sendCmd(btn.dataset.cmd);
         });
-        btn.addEventListener('touchend', (e) =&gt; {
+        btn.addEventListener('touchend', (e) => {
             e.preventDefault();
             btn.classList.remove('pressed');
             sendCmd('S');
@@ -1643,6 +1848,38 @@
 
     let digipetSlideshow = null;
     let droneSlideshow = null;
+    let taskSlideshow = null;
+    let conceptSlideshow = null;
+
+    // Manual slide control for ALL slideshows
+    function manualSlide(slideshowId, n) {
+        let ss;
+        if (slideshowId === 'taskclocked-slideshow') ss = taskSlideshow;
+        else if (slideshowId === 'concept-slideshow') ss = conceptSlideshow;
+        else if (slideshowId === 'digipet-slideshow') ss = digipetSlideshow;
+        else if (slideshowId === 'drone-slideshow') ss = droneSlideshow;
+
+        if (ss) {
+            ss.stopAutoPlay();
+            ss.showSlide(ss.currentIndex + n);
+            setTimeout(() => ss.startAutoPlay(), 3000);
+        }
+    }
+
+    // Show PDF (replace content)
+    function showPdf(type) {
+        const pdfContainer = document.getElementById('pdf-container');
+        const pdfFrame = document.getElementById('pdf-frame');
+
+        if (type === 'figma') {
+            pdfFrame.src = "figma.pdf"; // YOUR FIGMA PDF
+        } else {
+            pdfFrame.src = "proposal.pdf"; // YOUR PROPOSAL PDF
+        }
+
+        pdfContainer.style.display = 'block';
+        pdfContainer.scrollIntoView({ behavior: 'smooth' });
+    }
 
     function goPage(page) {
         document.getElementById('main-page').style.display = 'none';
@@ -1666,6 +1903,14 @@
                 }
                 droneSlideshow = new SlideshowManager('drone-slideshow');
             }, 100);
+        } else if (page === 'taskclocked') {
+            setTimeout(() => {
+                if (taskSlideshow) taskSlideshow.stopAutoPlay();
+                taskSlideshow = new SlideshowManager('taskclocked-slideshow');
+
+                if (conceptSlideshow) conceptSlideshow.stopAutoPlay();
+                conceptSlideshow = new SlideshowManager('concept-slideshow');
+            }, 100);
         }
         
         syncLangAll();
@@ -1679,6 +1924,12 @@
         }
         if (droneSlideshow) {
             droneSlideshow.stopAutoPlay();
+        }
+        if (taskSlideshow) {
+            taskSlideshow.stopAutoPlay();
+        }
+        if (conceptSlideshow) {
+            conceptSlideshow.stopAutoPlay();
         }
         document.querySelectorAll('[id$="-page"]').forEach(p => p.style.display = 'none');
         document.getElementById('main-page').style.display = 'block';
