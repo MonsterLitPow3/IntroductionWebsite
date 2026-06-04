@@ -431,7 +431,7 @@
     .external-iframe { height: 400px; }
 }
 
-/* ========== PHONE MOCKUP ========== */
+/* ========== PHONE MOCKUP 仅修改此处 ========== */
 .phone-mockup {
     display: flex;
     justify-content: center;
@@ -441,8 +441,9 @@
     width: 280px;
     height: 570px;
     background: #1a1a1a;
-    border-radius: 40px;
-    padding: 15px;
+    /* 1.减小圆角，不再大面积遮挡画面 */
+    border-radius: 22px;
+    padding: 12px; /* 缩小内边距，露出更多画面 */
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     position: relative;
     border: 2px solid #333;
@@ -450,7 +451,8 @@
 .phone-frame .slideshow-container {
     width: 100%;
     height: 100%;
-    border-radius: 30px;
+    /* 同步缩小内部画面圆角 */
+    border-radius: 16px;
     overflow: hidden;
     background: #000;
     position: relative;
@@ -458,11 +460,16 @@
 .phone-frame .slide img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    /* 3.图片原生清晰度修复：使用原始像素渲染，解决模糊 */
+    object-fit: contain;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
 }
+/* 2.圆点移出手机框，放到手机下方，不再遮挡屏幕 */
 .phone-dots {
-    position: absolute;
-    bottom: 12px;
+    position: relative;
+    bottom: unset;
+    margin-top:16px;
     width: 100%;
     text-align: center;
 }
